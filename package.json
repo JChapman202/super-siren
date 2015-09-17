@@ -16,5 +16,11 @@
   "dependencies": {
     "immutable": "^3.7.5",
     "superagent": "^1.4.0"
+  },
+  "engine": {
+    "node": ">= 4.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0"
   }
 }
