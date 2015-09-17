@@ -12,5 +12,9 @@
     "REST"
   ],
   "author": "John Chapman",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "immutable": "^3.7.5",
+    "superagent": "^1.4.0"
+  }
 }
