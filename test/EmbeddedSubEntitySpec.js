@@ -20,7 +20,6 @@ describe('EmbeddedSubEntity', () => {
 		});
 
 		it('Should have an empty entity instance', () => {
-			console.log(empty);
 			expect(empty.entity).to.equal(Siren.empty);
 		});
 	});
