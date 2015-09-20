@@ -1,8 +1,10 @@
 import Immutable from 'immutable';
 import Siren from '../lib/Siren';
+import SirenAction from '../lib/SirenAction';
 import SirenLink from '../lib/SirenLink';
 import {expect} from 'chai';
 import Chance from 'Chance';
+import sinon from 'sinon';
 
 var chance = new Chance();
 
@@ -147,6 +149,39 @@ describe('Siren', () => {
 					it('Should use the same SirenLink instance for all rels', () => {
 						expect(siren.links.get('a')).to.equal(siren.links.get('b'));
 					});
+				});
+			});
+
+			describe('When the JSON contains actions', () => {
+				var parse;
+
+				beforeEach(() => {
+					parse = SirenAction.parseJson;
+					SirenAction.parseJson = sinon.spy(j => new SirenAction({name: j.name}));
+
+					json.actions = [
+						{name: chance.string()},
+						{name: chance.string()}
+					];
+
+					act();
+				});
+
+				afterEach(() => {
+					SirenAction.parseJson = parse;
+				});
+
+				it('Should call SirenAction.parseJson for each action structure', () => {
+					sinon.assert.calledWith(SirenAction.parseJson, json.actions[0]);
+					sinon.assert.calledWith(SirenAction.parseJson, json.actions[1]);
+				});
+
+				it('Should create an entry in the actions map for each parsed Action, each keyed by name', () => {
+					expect(siren.actions.get(json.actions[0].name)).to.be.instanceOf(SirenAction);
+					expect(siren.actions.get(json.actions[0].name).name).to.equal(json.actions[0].name);
+
+					expect(siren.actions.get(json.actions[1].name)).to.be.instanceOf(SirenAction);
+					expect(siren.actions.get(json.actions[1].name).name).to.equal(json.actions[1].name);
 				});
 			});
 		});
