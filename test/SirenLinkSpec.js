@@ -20,7 +20,6 @@ describe('SirenLink', () => {
 			});
 
 			it('Should have links which contain all provided rels', () => {
-				console.log(link.rels);
 				expect(link.rels.toJS()).to.contain('a');
 				expect(link.rels.toJS()).to.contain('b');
 			});

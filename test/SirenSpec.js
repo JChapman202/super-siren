@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import LinkedSubEntity from '../lib/LinkedSubEntity';
 import Siren from '../lib/Siren';
 import SirenAction from '../lib/SirenAction';
 import SirenLink from '../lib/SirenLink';
@@ -182,6 +183,38 @@ describe('Siren', () => {
 
 					expect(siren.actions.get(json.actions[1].name)).to.be.instanceOf(SirenAction);
 					expect(siren.actions.get(json.actions[1].name).name).to.equal(json.actions[1].name);
+				});
+			});
+
+			describe('When the JSON contains a linked sub-entity', () => {
+				var parse;
+
+				beforeEach(() => {
+					parse = LinkedSubEntity.parseJson;
+					LinkedSubEntity.parseJson = sinon.spy(j => new LinkedSubEntity({rels: new Immutable.Set(j.rel), classes: new Immutable.Set(j.class), href: j.href}));
+
+					json.entities = [
+						{class: [chance.string()], rel: [chance.string(), chance.string()], href: chance.url()}
+					];
+
+					act();
+				});
+
+				afterEach(() => {
+					LinkedSubEntity.parseJson = parse;
+				});
+
+				it('Should use the LinkedSubEntity parseJson to create linked sub entities for each sub entity with an href', () => {
+					sinon.assert.calledWith(LinkedSubEntity.parseJson, json.entities[0]);
+				});
+
+				it('Should create an entity in the entities map for each of the rels on the parsed linked entity', () => {
+					expect(siren.entities.has(json.entities[0].rel[0])).to.be.true;
+					expect(siren.entities.has(json.entities[0].rel[1])).to.be.true;
+				});
+
+				it('Should have all entities refer to the same linked sub entity for matching rels', () => {
+					expect(siren.entities.get(json.entities[0].rel[0])).to.equal(siren.entities.get(json.entities[0].rel[1]));
 				});
 			});
 		});
