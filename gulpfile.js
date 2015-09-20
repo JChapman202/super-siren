@@ -13,10 +13,9 @@ gulp.task('clean', () => {
 });
 
 gulp.task('build', ['clean'], () => {
-	return gulp.src(['index.js', 'lib/**/*.js'])
+	return gulp.src(['index.js', 'lib/**/*.js'], {base: './'})
 		.pipe(sourcemaps.init())
-		.pipe(babel())
-		.pipe(concat('index.js'))
+		.pipe(babel({optional: ['runtime']}))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('dist'));
 });
