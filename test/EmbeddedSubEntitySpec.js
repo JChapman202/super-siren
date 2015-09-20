@@ -1,8 +1,9 @@
 import Siren from '../lib/Siren';
-import EmbeddedSubEntity from '../lib/EmbeddedSubEntity';
 import {expect} from 'chai';
 import Chance from 'chance';
 import sinon from 'sinon';
+
+var EmbeddedSubEntity = Siren.EmbeddedSubEntity;
 
 var chance = new Chance();
 
@@ -19,6 +20,7 @@ describe('EmbeddedSubEntity', () => {
 		});
 
 		it('Should have an empty entity instance', () => {
+			console.log(empty);
 			expect(empty.entity).to.equal(Siren.empty);
 		});
 	});
@@ -29,12 +31,12 @@ describe('EmbeddedSubEntity', () => {
 		var parse;
 
 		var act = () => {
-			subEntity = EmbeddedSubEntity.parseJson(json);
+			subEntity = EmbeddedSubEntity.fromJson(json);
 		};
 
 		beforeEach(() => {
-			parse = Siren.parseJson;
-			Siren.parseJson = sinon.spy(j => Siren.empty);
+			parse = Siren.fromJson;
+			Siren.fromJson = sinon.spy(j => Siren.empty);
 
 			json = {
 				rel: [chance.string(), chance.string()]
@@ -42,7 +44,7 @@ describe('EmbeddedSubEntity', () => {
 		});
 
 		afterEach(() => {
-			Siren.parseJson = parse;
+			Siren.fromJson = parse;
 		});
 
 		describe('When a JSON structure does not include a rel array', () => {
@@ -66,7 +68,7 @@ describe('EmbeddedSubEntity', () => {
 			});
 
 			it('Should pass the sub entity JSON to the Siren parseJson to construct the entity', () => {
-				sinon.assert.calledWith(Siren.parseJson, json);
+				sinon.assert.calledWith(Siren.fromJson, json);
 			});
 
 			it('Should have an entity equal to the result of the parseJson call', () => {

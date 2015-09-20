@@ -34,7 +34,7 @@ describe('ActionField', () => {
 		var field;
 
 		var act = () => {
-			field = ActionField.parseJson(json);
+			field = ActionField.fromJson(json);
 		};
 
 		beforeEach(() => {

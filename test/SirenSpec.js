@@ -7,6 +7,7 @@ import {expect} from 'chai';
 import Chance from 'Chance';
 import sinon from 'sinon';
 
+var EmbeddedSubEntity = Siren.EmbeddedSubEntity;
 var chance = new Chance();
 
 describe('Siren', () => {
@@ -157,8 +158,8 @@ describe('Siren', () => {
 				var parse;
 
 				beforeEach(() => {
-					parse = SirenAction.parseJson;
-					SirenAction.parseJson = sinon.spy(j => new SirenAction({name: j.name}));
+					parse = SirenAction.fromJson;
+					SirenAction.fromJson = sinon.spy(j => new SirenAction({name: j.name}));
 
 					json.actions = [
 						{name: chance.string()},
@@ -169,12 +170,12 @@ describe('Siren', () => {
 				});
 
 				afterEach(() => {
-					SirenAction.parseJson = parse;
+					SirenAction.fromJson = parse;
 				});
 
-				it('Should call SirenAction.parseJson for each action structure', () => {
-					sinon.assert.calledWith(SirenAction.parseJson, json.actions[0]);
-					sinon.assert.calledWith(SirenAction.parseJson, json.actions[1]);
+				it('Should call SirenAction.fromJson for each action structure', () => {
+					sinon.assert.calledWith(SirenAction.fromJson, json.actions[0]);
+					sinon.assert.calledWith(SirenAction.fromJson, json.actions[1]);
 				});
 
 				it('Should create an entry in the actions map for each parsed Action, each keyed by name', () => {
@@ -190,8 +191,8 @@ describe('Siren', () => {
 				var parse;
 
 				beforeEach(() => {
-					parse = LinkedSubEntity.parseJson;
-					LinkedSubEntity.parseJson = sinon.spy(j => new LinkedSubEntity({rels: new Immutable.Set(j.rel), classes: new Immutable.Set(j.class), href: j.href}));
+					parse = LinkedSubEntity.fromJson;
+					LinkedSubEntity.fromJson = sinon.spy(j => new LinkedSubEntity({rels: new Immutable.Set(j.rel), classes: new Immutable.Set(j.class), href: j.href}));
 
 					json.entities = [
 						{class: [chance.string()], rel: [chance.string(), chance.string()], href: chance.url()}
@@ -201,11 +202,11 @@ describe('Siren', () => {
 				});
 
 				afterEach(() => {
-					LinkedSubEntity.parseJson = parse;
+					LinkedSubEntity.fromJson = parse;
 				});
 
-				it('Should use the LinkedSubEntity parseJson to create linked sub entities for each sub entity with an href', () => {
-					sinon.assert.calledWith(LinkedSubEntity.parseJson, json.entities[0]);
+				it('Should use the LinkedSubEntity fromJson to create linked sub entities for each sub entity with an href', () => {
+					sinon.assert.calledWith(LinkedSubEntity.fromJson, json.entities[0]);
 				});
 
 				it('Should create an entity in the entities map for each of the rels on the parsed linked entity', () => {
@@ -214,6 +215,38 @@ describe('Siren', () => {
 				});
 
 				it('Should have all entities refer to the same linked sub entity for matching rels', () => {
+					expect(siren.entities.get(json.entities[0].rel[0])).to.equal(siren.entities.get(json.entities[0].rel[1]));
+				});
+			});
+
+			describe('When the JSON contains an embedded sub-entity', () => {
+				var parse;
+
+				beforeEach(() => {
+					parse = EmbeddedSubEntity.fromJson;
+					EmbeddedSubEntity.fromJson = sinon.spy(j => new EmbeddedSubEntity({rels: new Immutable.Set(j.rel), entity: new Siren()}));
+
+					json.entities = [
+						{rel: [chance.string(), chance.string()], class: [chance.string()], properties: [{a: chance.string()}]}
+					];
+
+					act();
+				});
+
+				afterEach(() => {
+					EmbeddedSubEntity.fromJson = parse;
+				});
+
+				it('Should use the EmbeddedSubEntity fromJson to create embedded sub entities for each sub entity without an href', () => {
+					sinon.assert.calledWith(EmbeddedSubEntity.fromJson, json.entities[0]);
+				});
+
+				it('Should create an entity in the entities map for each of the rels on the parsed embedded entity', () => {
+					expect(siren.entities.has(json.entities[0].rel[0])).to.be.true;
+					expect(siren.entities.has(json.entities[0].rel[1])).to.be.true;
+				});
+
+				it('Should have all entities refer to the same embedded sub entity for matching rels', () => {
 					expect(siren.entities.get(json.entities[0].rel[0])).to.equal(siren.entities.get(json.entities[0].rel[1]));
 				});
 			});

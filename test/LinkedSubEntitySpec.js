@@ -30,7 +30,7 @@ describe('LinkedSubEntity', () => {
 		var linkedSubEntity;
 
 		var act = () => {
-			linkedSubEntity = LinkedSubEntity.parseJson(json);
+			linkedSubEntity = LinkedSubEntity.fromJson(json);
 		};
 
 		beforeEach(() => {

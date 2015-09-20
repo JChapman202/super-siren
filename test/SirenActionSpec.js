@@ -40,7 +40,7 @@ describe('SirenAction', () => {
 		var json;
 
 		var act = () => {
-			action = SirenAction.parseJson(json);
+			action = SirenAction.fromJson(json);
 		};
 
 		beforeEach(() => {
@@ -119,8 +119,8 @@ describe('SirenAction', () => {
 			var parse;
 
 			beforeEach(() => {
-				parse = ActionField.parseJson;
-				ActionField.parseJson = sinon.spy(j => new ActionField({name: j.name, type: j.type}));
+				parse = ActionField.fromJson;
+				ActionField.fromJson = sinon.spy(j => new ActionField({name: j.name, type: j.type}));
 
 				json.fields = [
 					{name: chance.string(), type: 'text'},
@@ -130,12 +130,12 @@ describe('SirenAction', () => {
 			});
 
 			afterEach(() => {
-				ActionField.parseJson = parse;
+				ActionField.fromJson = parse;
 			});
 
-			it('Should use the ActionField parseJson method for each field', () => {
-				sinon.assert.calledWith(ActionField.parseJson, json.fields[0]);
-				sinon.assert.calledWith(ActionField.parseJson, json.fields[1]);
+			it('Should use the ActionField fromJson method for each field', () => {
+				sinon.assert.calledWith(ActionField.fromJson, json.fields[0]);
+				sinon.assert.calledWith(ActionField.fromJson, json.fields[1]);
 			});
 
 			it('Should have all fields in the map keyed by the name of the parsed ActionField field', () => {
