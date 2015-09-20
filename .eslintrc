@@ -10,7 +10,8 @@
 		"defaultParams": false,                     // enable default function parameters
 		"forOf": false,                             // enable for-of loops
 		"generators": false,                        // enable generators
-		"objectLiteralComputedProperties": false,   // enable computed object literal property names
+		"modules": true,
+    "objectLiteralComputedProperties": false,   // enable computed object literal property names
 		"objectLiteralDuplicateProperties": false,  // enable duplicate object literal properties in strict mode
 		"objectLiteralShorthandMethods": false,     // enable object literal shorthand methods
 		"objectLiteralShorthandProperties": false,  // enable object literal shorthand properties
@@ -26,12 +27,14 @@
     "no-debugger": 2,
     "no-dupe-keys": 2,
     "no-extra-semi": 2,
+    "semi": [2, "always"],
     "no-invalid-regexp": 2,
     "no-unreachable": 1,
     "valid-jsdoc": 1,
 
     "curly": 1,
     "no-shadow": 2,
-    "no-undef": 2
+    "no-undef": 2,
+    "quotes": [2, "single"]
   }
 }
