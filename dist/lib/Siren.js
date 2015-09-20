@@ -38,8 +38,8 @@ var _Client = require('./Client');
 
 var _Client2 = _interopRequireDefault(_Client);
 
-_Client2['default'].addParser('application/vnd.siren+json', function (res) {
-	return Siren.fromJson(JSON.parse(res));
+_Client2['default'].addParser('application/vnd.siren+json', function (text) {
+	return Siren.fromJson(JSON.parse(text));
 });
 
 _Client2['default'].addHeader('Cache-Control', 'no-cache,no-store,must-revalidate,max-age=-1');

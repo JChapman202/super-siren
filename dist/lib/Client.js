@@ -100,7 +100,26 @@ var Client = (function () {
 	}, {
 		key: 'addParser',
 		value: function addParser(contentType, parseFunction) {
-			_superagent2['default'].parse[contentType] = parseFunction;
+			_superagent2['default'].parse[contentType] = function (res, done) {
+				res.text = '';
+				res.setEncoding('utf8');
+				res.on('data', function (chunk) {
+					res.text += chunk;
+				});
+				res.on('end', function () {
+					var err = null;
+					var body = null;
+
+					try {
+						var text = res.text && res.text.replace(/^\s*|\s*$/g, '');
+						body = text && parseFunction(text);
+					} catch (e) {
+						err = e;
+					} finally {
+						done(err, body);
+					}
+				});
+			};
 		}
 
 		/**
