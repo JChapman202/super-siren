@@ -2,7 +2,4 @@
 import 'babel/register';
 import Siren from './lib/Siren';
 
-export {
-	Siren
-};
-
+export default Siren;
