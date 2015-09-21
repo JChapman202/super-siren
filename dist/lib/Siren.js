@@ -38,6 +38,10 @@ var _Client = require('./Client');
 
 var _Client2 = _interopRequireDefault(_Client);
 
+var _SirenHelpers = require('./SirenHelpers');
+
+var _SirenHelpers2 = _interopRequireDefault(_SirenHelpers);
+
 _Client2['default'].addParser('application/vnd.siren+json', function (text) {
 	return Siren.fromJson(JSON.parse(text));
 });
@@ -64,14 +68,14 @@ var Siren = (function (_Immutable$Record) {
 	/**
   * Finds the @see {@link SirenAction} referenced by the provided rel.
   *
-  * @param  {String} rel The relation to this Siren entity for the requested action.
-  * @return {SirenAction} SirenAction matching the requested rel.  null if none is found.
+  * @param  {String} name The name of the action to find.
+  * @return {SirenAction} SirenAction matching the requested name.  null if none is found.
   */
 
 	_createClass(Siren, [{
-		key: 'findActionByRel',
-		value: function findActionByRel(rel) {
-			return this.actions.get(rel) || null;
+		key: 'findActionByName',
+		value: function findActionByName(name) {
+			return this.actions.get(name) || null;
 		}
 
 		/**
@@ -240,6 +244,8 @@ Siren.Action = _SirenAction2['default'];
 Siren.LinkedSubEntity = _LinkedSubEntity2['default'];
 Siren.EmbeddedSubEntity = EmbeddedSubEntity;
 Siren.Client = _Client2['default'];
+
+Siren.Helper = _SirenHelpers2['default'];
 
 module.exports = Siren;
 //# sourceMappingURL=../lib/Siren.js.map

@@ -4,8 +4,6 @@ var _createClass = require('babel-runtime/helpers/create-class')['default'];
 
 var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
 
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
 Object.defineProperty(exports, '__esModule', {
@@ -20,7 +18,11 @@ var _superagent = require('superagent');
 
 var _superagent2 = _interopRequireDefault(_superagent);
 
-var request = require('superagent-promise')(_superagent2['default'], _Promise);
+var _bluebird = require('bluebird');
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
+var request = require('superagent-promise')(_superagent2['default'], _bluebird2['default']);
 
 var globalHeaders = new _immutable2['default'].Map();
 
@@ -76,7 +78,7 @@ var Client = (function () {
 	}, {
 		key: 'action',
 		value: function action(method, href) {
-			method = (method || 'get').toLower();
+			method = (method || 'get').toLowerCase();
 
 			if (method === 'delete') {
 				method = 'del';
