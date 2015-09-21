@@ -102,6 +102,17 @@ var Siren = (function (_Immutable$Record) {
 			return this.entities.get(rel) || null;
 		}
 
+		/**
+   * Returns the self link for this entity
+   *
+   * @return {SirenLink} link represented by the self rel, null if no self link is found.
+   */
+	}, {
+		key: 'self',
+		get: function get() {
+			return this.findLinkByRel('self');
+		}
+
 		//TODO: add a validate method and use it while parsing
 		/**
    * Parses a JSON representation of a Siren entity

@@ -46,6 +46,34 @@ describe('Siren', () => {
 			});
 		});
 
+		describe('self', () => {
+			describe('When a link with a self rel exists', () => {
+				var link;
+
+				beforeEach(() => {
+					link = new SirenLink('self', chance.url());
+					siren = new Siren({links: new Immutable.Map().set('self', link)});
+				});
+
+				it('self should return that link', () => {
+					expect(siren.self).to.equal(link);
+				});
+			});
+
+			describe('When no link with a self rel exists', () => {
+				var link;
+
+				beforeEach(() => {
+					link = new SirenLink('not-self', chance.url());
+					siren = new Siren({links: new Immutable.Map().set('not-self', link)});
+				});
+
+				it('self should return null', () => {
+					expect(siren.self).to.be.null;
+				});
+			});
+		});
+
 		describe('When parsing a JSON Siren representation', () => {
 			var json;
 
