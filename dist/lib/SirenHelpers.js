@@ -31,7 +31,7 @@ function follow(rel) {
 /**
  * Performs the action identified by the provided actionName using the provided data.
  *
- * @param  {String} actionName The name that identifies the action to take
+ * @param  {String} name       The name that identifies the action to take
  * @param  {Object} data       The data to send on the action
  * @return {Promise}           Promise which resolves to a superagent response
  */

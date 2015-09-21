@@ -99,7 +99,56 @@ var Siren = (function (_Immutable$Record) {
 	}, {
 		key: 'findEntityByRel',
 		value: function findEntityByRel(rel) {
+			//TODO: this needs to be plural
 			return this.entities.get(rel) || null;
+		}
+
+		/**
+   * Returns the sub-entities on this Siren object which are embedded sub-entities.
+   *
+   * @param  {String} [rel=null] Optional rel which restricts the matching embedded entities to those with this rel.
+   * @return {Immutable.Set}     Set of embedded sub-entities which match the optional provided rel.
+   */
+	}, {
+		key: 'embeddedEntities',
+		value: function embeddedEntities() {
+			var rel = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
+			var entities = this.entities.filter(function (item) {
+				return item instanceof EmbeddedSubEntity;
+			});
+
+			if (rel) {
+				entities = entities.filter(function (item, key) {
+					return key == rel;
+				});
+			}
+
+			return entities.toSet();
+		}
+
+		/**
+   * Returns the sub-entities on the Siren object which are linked sub-entities.
+   *
+   * @param  {String} [rel=null] Optional rel which restricts the matching linked entities to those with this rel.
+   * @return {Immutable.Set}     Set of linked sub-entities which match the optional provided rel.
+   */
+	}, {
+		key: 'linkedEntities',
+		value: function linkedEntities() {
+			var rel = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
+			var entities = this.entities.filter(function (item) {
+				return item instanceof _LinkedSubEntity2['default'];
+			});
+
+			if (rel) {
+				entities = entities.filter(function (item, key) {
+					return key == rel;
+				});
+			}
+
+			return entities.toSet();
 		}
 
 		/**
@@ -108,7 +157,7 @@ var Siren = (function (_Immutable$Record) {
    * @return {SirenLink} link represented by the self rel, null if no self link is found.
    */
 	}, {
-		key: 'self',
+		key: 'selfLink',
 		get: function get() {
 			return this.findLinkByRel('self');
 		}

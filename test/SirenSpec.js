@@ -46,7 +46,7 @@ describe('Siren', () => {
 			});
 		});
 
-		describe('self', () => {
+		describe('selfLink', () => {
 			describe('When a link with a self rel exists', () => {
 				var link;
 
@@ -55,8 +55,8 @@ describe('Siren', () => {
 					siren = new Siren({links: new Immutable.Map().set('self', link)});
 				});
 
-				it('self should return that link', () => {
-					expect(siren.self).to.equal(link);
+				it('selfLink should return that link', () => {
+					expect(siren.selfLink).to.equal(link);
 				});
 			});
 
@@ -68,8 +68,8 @@ describe('Siren', () => {
 					siren = new Siren({links: new Immutable.Map().set('not-self', link)});
 				});
 
-				it('self should return null', () => {
-					expect(siren.self).to.be.null;
+				it('selfLink should return null', () => {
+					expect(siren.selfLink).to.be.null;
 				});
 			});
 		});
@@ -245,6 +245,18 @@ describe('Siren', () => {
 				it('Should have all entities refer to the same linked sub entity for matching rels', () => {
 					expect(siren.entities.get(json.entities[0].rel[0])).to.equal(siren.entities.get(json.entities[0].rel[1]));
 				});
+
+				describe('When requesting linkedEntities from the Siren', () => {
+					var linkedEntities;
+
+					beforeEach(() => {
+						linkedEntities = siren.linkedEntities();
+					});
+
+					it('Should include the parsed sub-entiti', () => {
+						expect(linkedEntities.contains(siren.entities.get(json.entities[0].rel[0]))).to.be.true;
+					});
+				});
 			});
 
 			describe('When the JSON contains an embedded sub-entity', () => {
@@ -276,6 +288,18 @@ describe('Siren', () => {
 
 				it('Should have all entities refer to the same embedded sub entity for matching rels', () => {
 					expect(siren.entities.get(json.entities[0].rel[0])).to.equal(siren.entities.get(json.entities[0].rel[1]));
+				});
+
+				describe('When requesting embeddedEntities from the Siren', () => {
+					var embeddedEntities;
+
+					beforeEach(() => {
+						embeddedEntities = siren.embeddedEntities();
+					});
+
+					it('Should include the parsed sub-entiti', () => {
+						expect(embeddedEntities.contains(siren.entities.get(json.entities[0].rel[0]))).to.be.true;
+					});
 				});
 			});
 		});
