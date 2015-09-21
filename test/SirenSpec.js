@@ -51,8 +51,8 @@ describe('Siren', () => {
 				var link;
 
 				beforeEach(() => {
-					link = new SirenLink('self', chance.url());
-					siren = new Siren({links: new Immutable.Map().set('self', link)});
+					link = new SirenLink(['self'], chance.url());
+					siren = new Siren({links: new Immutable.Set().add(link)});
 				});
 
 				it('selfLink should return that link', () => {
@@ -153,12 +153,12 @@ describe('Siren', () => {
 						act();
 					});
 
-					it('Should provide access to the link as a map by rel', () => {
-						expect(siren.links.has('a')).to.be.true;
+					it('Should construct a SirenLink instance for the provided link', () => {
+						expect(siren.links.filter(link => link.rels.contains('a')).first()).not.to.be.null;
 					});
 
-					it('Should construct a SirenLink instance for the provided link', () => {
-						expect(siren.links.get('a')).to.be.an.instanceOf(SirenLink);
+					it('Should allow for retrieval of the SirenLink by rel', () => {
+						expect(siren.findLinkByRel('a')).not.to.be.null;
 					});
 				});
 
@@ -171,13 +171,18 @@ describe('Siren', () => {
 						act();
 					});
 
-					it('Should contain links at all rels', () => {
-						expect(siren.links.has('a')).to.be.true;
-						expect(siren.links.has('b')).to.be.true;
+					it('Should construct a SirenLink instance for the provided link', () => {
+						expect(siren.links.filter(link => link.rels.contains('a')).first()).not.to.be.null;
+						expect(siren.links.filter(link => link.rels.contains('b')).first()).not.to.be.null;
+					});
+
+					it('Should allow for retrieval of the SirenLink by rel', () => {
+						expect(siren.findLinkByRel('a')).not.to.be.null;
+						expect(siren.findLinkByRel('b')).not.to.be.null;
 					});
 
 					it('Should use the same SirenLink instance for all rels', () => {
-						expect(siren.links.get('a')).to.equal(siren.links.get('b'));
+						expect(siren.findLinkByRel('a')).to.equal(siren.findLinkByRel('b'));
 					});
 				});
 			});
