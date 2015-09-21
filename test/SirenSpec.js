@@ -237,25 +237,18 @@ describe('Siren', () => {
 					sinon.assert.calledWith(LinkedSubEntity.fromJson, json.entities[0]);
 				});
 
-				it('Should create an entity in the entities map for each of the rels on the parsed linked entity', () => {
-					expect(siren.entities.has(json.entities[0].rel[0])).to.be.true;
-					expect(siren.entities.has(json.entities[0].rel[1])).to.be.true;
+				it('Should create an entity in the entities set with matching rels', () => {
+					expect(siren.entities.filter(item => item.rels.contains(json.entities[0].rel[0])).first()).to.not.be.null;
+					expect(siren.entities.filter(item => item.rels.contains(json.entities[0].rel[1])).first()).to.not.be.null;
+				});
+
+				it('Should allow for retrieval of the linked sub-entity by each rel', () => {
+					expect(siren.linkedEntitiesByRel(json.entities[0].rel[0]).first()).not.to.be.null;
+					expect(siren.linkedEntitiesByRel(json.entities[0].rel[1]).first()).not.to.be.null;
 				});
 
 				it('Should have all entities refer to the same linked sub entity for matching rels', () => {
-					expect(siren.entities.get(json.entities[0].rel[0])).to.equal(siren.entities.get(json.entities[0].rel[1]));
-				});
-
-				describe('When requesting linkedEntities from the Siren', () => {
-					var linkedEntities;
-
-					beforeEach(() => {
-						linkedEntities = siren.linkedEntities;
-					});
-
-					it('Should include the parsed sub-entiti', () => {
-						expect(linkedEntities.contains(siren.entities.get(json.entities[0].rel[0]))).to.be.true;
-					});
+					expect(siren.linkedEntitiesByRel(json.entities[0].rel[0]).first()).to.be.equal(siren.linkedEntitiesByRel(json.entities[0].rel[1]).first())
 				});
 			});
 
@@ -282,24 +275,17 @@ describe('Siren', () => {
 				});
 
 				it('Should create an entity in the entities map for each of the rels on the parsed embedded entity', () => {
-					expect(siren.entities.has(json.entities[0].rel[0])).to.be.true;
-					expect(siren.entities.has(json.entities[0].rel[1])).to.be.true;
+					expect(siren.entities.filter(item => item.rels.contains(json.entities[0].rel[0])).first()).not.to.be.null;
+					expect(siren.entities.filter(item => item.rels.contains(json.entities[0].rel[1])).first()).not.to.be.null;
+				});
+
+				it('Should allow for retrieval of the embedded sub-entity by each rel', () => {
+					expect(siren.embeddedEntitiesByRel(json.entities[0].rel[0]).first()).not.to.be.null;
+					expect(siren.embeddedEntitiesByRel(json.entities[0].rel[1]).first()).not.to.be.null;
 				});
 
 				it('Should have all entities refer to the same embedded sub entity for matching rels', () => {
-					expect(siren.entities.get(json.entities[0].rel[0])).to.equal(siren.entities.get(json.entities[0].rel[1]));
-				});
-
-				describe('When requesting embeddedEntities from the Siren', () => {
-					var embeddedEntities;
-
-					beforeEach(() => {
-						embeddedEntities = siren.embeddedEntities;
-					});
-
-					it('Should include the parsed sub-entiti', () => {
-						expect(embeddedEntities.contains(siren.entities.get(json.entities[0].rel[0]))).to.be.true;
-					});
+					expect(siren.embeddedEntitiesByRel(json.entities[0].rel[0]).first()).to.be.equal(siren.embeddedEntitiesByRel(json.entities[0].rel[1]).first())
 				});
 			});
 		});
