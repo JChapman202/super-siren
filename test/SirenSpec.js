@@ -253,7 +253,7 @@ describe('Siren', () => {
 				});
 
 				it('Should have all entities refer to the same linked sub entity for matching rels', () => {
-					expect(siren.linkedEntitiesByRel(json.entities[0].rel[0]).first()).to.be.equal(siren.linkedEntitiesByRel(json.entities[0].rel[1]).first())
+					expect(siren.linkedEntitiesByRel(json.entities[0].rel[0]).first()).to.be.equal(siren.linkedEntitiesByRel(json.entities[0].rel[1]).first());
 				});
 			});
 
@@ -290,7 +290,7 @@ describe('Siren', () => {
 				});
 
 				it('Should have all entities refer to the same embedded sub entity for matching rels', () => {
-					expect(siren.embeddedEntitiesByRel(json.entities[0].rel[0]).first()).to.be.equal(siren.embeddedEntitiesByRel(json.entities[0].rel[1]).first())
+					expect(siren.embeddedEntitiesByRel(json.entities[0].rel[0]).first()).to.be.equal(siren.embeddedEntitiesByRel(json.entities[0].rel[1]).first());
 				});
 			});
 		});

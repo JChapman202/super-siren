@@ -7,12 +7,12 @@ var sourcemaps = require('gulp-sourcemaps');
 var clean = require('gulp-clean');
 require('babel/register');
 
-gulp.task('clean', () => {
+gulp.task('clean', function() {
 	return gulp.src(['dist'], {read: false})
 		.pipe(clean());
 });
 
-gulp.task('build', ['clean'], () => {
+gulp.task('build', ['clean'], function() {
 	return gulp.src(['index.js', 'lib/**/*.js'], {base: './'})
 		.pipe(sourcemaps.init())
 		.pipe(babel({optional: ['runtime']}))
@@ -20,14 +20,14 @@ gulp.task('build', ['clean'], () => {
 		.pipe(gulp.dest('dist'));
 });
 
-gulp.task('lint', () => {
+gulp.task('lint', function() {
 	return gulp.src(['index.js', 'lib/**/*.js', 'test/**/*.js'])
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(eslint.failOnError());
 });
 
-gulp.task('test', () => {
+gulp.task('test', function() {
 	return gulp.src(['test/**/*.js'], {read: false})
 		.pipe(mocha({
 			compilers: {
@@ -37,7 +37,7 @@ gulp.task('test', () => {
 		}));
 });
 
-gulp.task('watch', () => {
+gulp.task('watch', function() {
 	gulp.watch(['index.js', 'lib/**/*.js', 'test/**/*.js'], ['lint', 'test', 'build']);
 });
 
