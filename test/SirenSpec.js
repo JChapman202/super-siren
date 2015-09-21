@@ -250,7 +250,7 @@ describe('Siren', () => {
 					var linkedEntities;
 
 					beforeEach(() => {
-						linkedEntities = siren.linkedEntities();
+						linkedEntities = siren.linkedEntities;
 					});
 
 					it('Should include the parsed sub-entiti', () => {
@@ -294,7 +294,7 @@ describe('Siren', () => {
 					var embeddedEntities;
 
 					beforeEach(() => {
-						embeddedEntities = siren.embeddedEntities();
+						embeddedEntities = siren.embeddedEntities;
 					});
 
 					it('Should include the parsed sub-entiti', () => {
