@@ -1,0 +1,2441 @@
+[
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/ActionField.js",
+    "memberof": null,
+    "longname": "lib/ActionField.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Immutable from 'immutable';\r\n\r\n/**\r\n * Describes a field on an Action and how this field\r\n * should be sent to Siren API as part of that Action.\r\n *\r\n * @param {String} options.name:  ''     [description]\r\n * @param {String} options.title: null   [description]\r\n * @param {String} options.type:  'text' [description]\r\n * @param {Object} options.value: null   Default value to be sent on the field\r\n */\r\nclass ActionField extends Immutable.Record({\r\n\tname: '',\r\n\ttitle: null,\r\n\ttype: 'text',\r\n\tvalue: null\r\n}) {\r\n\t/**\r\n\t * Parses a JSON representation of a field.\r\n\t *\r\n\t * @param {Object} json The Object representation of the ActionField.\r\n\t * @return {ActionField} parsed structure which represents a field on an action.\r\n\t */\r\n\tstatic fromJson(json) {\r\n\t\tif (!json.name) {\r\n\t\t\tthrow new Error('name is required on an action field');\r\n\t\t}\r\n\r\n\t\treturn empty.withMutations(map => {\r\n\t\t\tmap.set('name', json.name || map.name);\r\n\t\t\tmap.set('title', json.title || map.title);\r\n\t\t\tmap.set('type', json.type || map.type);\r\n\t\t\tmap.set('value', json.value || map.value);\r\n\t\t});\r\n\t}\r\n\r\n\t/**\r\n\t * Default empty state for a field.\r\n\t *\r\n\t * @return {ActionField} Default state\r\n\t */\r\n\tstatic get empty() {\r\n\t\treturn empty;\r\n\t}\r\n}\r\n\r\nvar empty = new ActionField();\r\n\r\nexport default ActionField;\r\n"
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/ActionField.js",
+    "longname": "lib/ActionField.js~empty",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/ActionField.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 47,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/ActionField.js~ActionField"
+      ]
+    }
+  },
+  {
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "ActionField",
+    "memberof": "lib/ActionField.js",
+    "longname": "lib/ActionField.js~ActionField",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/ActionField.js",
+    "importStyle": "ActionField",
+    "description": "Describes a field on an Action and how this field\nshould be sent to Siren API as part of that Action.",
+    "lineNumber": 12,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name:",
+        "description": "''     [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.title:",
+        "description": "null   [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.type:",
+        "description": "'text' [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.value:",
+        "description": "null   Default value to be sent on the field"
+      }
+    ],
+    "interface": false,
+    "expressionExtends": ""
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "fromJson",
+    "memberof": "lib/ActionField.js~ActionField",
+    "longname": "lib/ActionField.js~ActionField.fromJson",
+    "access": null,
+    "description": "Parses a JSON representation of a field.",
+    "lineNumber": 24,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "json",
+        "description": "The Object representation of the ActionField."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "ActionField"
+      ],
+      "spread": false,
+      "description": "parsed structure which represents a field on an action."
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/ActionField.js~ActionField",
+    "longname": "lib/ActionField.js~ActionField.empty",
+    "access": null,
+    "description": "Default empty state for a field.",
+    "lineNumber": 42,
+    "return": {
+      "nullable": null,
+      "types": [
+        "ActionField"
+      ],
+      "spread": false,
+      "description": "Default state"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "actionField",
+    "memberof": "lib/ActionField.js",
+    "longname": "lib/ActionField.js~actionField",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/ActionField.js",
+    "importStyle": "actionField",
+    "description": null,
+    "lineNumber": 49,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/ActionField.js~ActionField"
+      ]
+    }
+  },
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/Client.js",
+    "memberof": null,
+    "longname": "lib/Client.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Immutable from 'immutable';\r\nimport superagent from 'superagent';\r\nimport bluebird from 'bluebird';\r\nimport Uri from 'urijs';\r\n\r\nvar request = require('superagent-promise')(superagent, bluebird);\r\n\r\nvar globalHeaders = new Immutable.Map();\r\n\r\n/**\r\n * HTTP client used by the Super-Siren library.  Library utilized [superaget](https://github.com/visionmedia/superagent)\r\n * for all requests.\r\n */\r\nclass Client {\r\n\t/**\r\n\t * Creates a superagent HTTP get operation\r\n\t *\r\n\t * @param {String} href The URL to perform an HTTP get against.\r\n\t * @return {superagent-promise} superagent get request\r\n\t */\r\n\tstatic get(href) {\r\n\t\tvar req = request.get(href);\r\n\t\taddHeaders(req);\r\n\r\n\t\treturn req;\r\n\t}\r\n\r\n\tstatic put(href) {\r\n\t\tvar req = request.put(href);\r\n\t\taddHeaders(req);\r\n\r\n\t\treturn req;\r\n\t}\r\n\r\n\tstatic post(href) {\r\n\t\tvar req = request.post(href);\r\n\t\taddHeaders(req);\r\n\r\n\t\treturn req;\r\n\t}\r\n\r\n\tstatic del(href) {\r\n\t\tvar req = request.del(href);\r\n\t\taddHeaders(req);\r\n\r\n\t\treturn req;\r\n\t}\r\n\r\n\tstatic action(method, href) {\r\n\t\tmethod = (method || 'get').toLowerCase();\r\n\r\n\t\tif (method === 'delete') {\r\n\t\t\tmethod = 'del';\r\n\t\t}\r\n\r\n\t\tvar req = request[method](href);\r\n\t\taddHeaders(req);\r\n\r\n\t\treturn req;\r\n\t}\r\n\r\n\t/**\r\n\t * Registers a content type parser with all client instances.\r\n\t *\r\n\t * @param {String} contentType     content-type which should be parsed with the provided function\r\n\t *                                 whenever a response is received with this content type.\r\n\t * @param {Function} parseFunction Function to call in order to return response body when response\r\n\t *                                 is encoded with the provided contentType.\r\n\t * @returns {undefined}\r\n\t */\r\n\tstatic addParser(contentType, parseFunction) {\r\n\t\tsuperagent.parse[contentType] = (res, done) => {\r\n\t\t\t//TODO: cannot assume http\r\n\t\t\tvar baseUrl = null;\r\n\r\n\t\t\tif (res.req && res.req._headers && res.req._headers.host) {\r\n\t\t\t\tbaseUrl = new Uri({protocol: 'http', hostname: res.req._headers.host}).toString();\r\n\t\t\t\tbaseUrl = new Uri(res.req.path).absoluteTo(baseUrl).toString();\r\n\t\t\t}\r\n\r\n\t\t\tres.text = '';\r\n\t\t\tres.setEncoding('utf8');\r\n\t\t\tres.on('data', chunk => {res.text += chunk;});\r\n\t\t\tres.on('end', () => {\r\n\t\t\t\tvar err = null;\r\n\t\t\t\tvar body = null;\r\n\r\n\t\t\t\ttry {\r\n\t\t\t\t\tvar text = res.text && res.text.replace(/^\\s*|\\s*$/g, '');\r\n\t\t\t\t\tbody = text && parseFunction(text, baseUrl);\r\n\t\t\t\t}\r\n\t\t\t\tcatch(e) {\r\n\t\t\t\t\terr = e;\r\n\t\t\t\t}\r\n\t\t\t\tfinally {\r\n\t\t\t\t\tdone(err, body);\r\n\t\t\t\t}\r\n\t\t\t});\r\n\t\t};\r\n\t}\r\n\r\n\t/**\r\n\t * Returns a Map of current global headers that are added\r\n\t * for all clients.\r\n\t *\r\n\t * @return {Immutable.Map} Immutable map of all currently registered headers\r\n\t */\r\n\tstatic get globalHeaders() {\r\n\t\treturn globalHeaders;\r\n\t}\r\n\r\n\t/**\r\n\t * Registers a global header to be used by all client instances.\r\n\t *\r\n\t * @param {String} header The header attribute to set\r\n\t * @param {String} value The header value to set\r\n\t * @returns {undefined}\r\n\t */\r\n\tstatic addHeader(header, value) {\r\n\t\tglobalHeaders = globalHeaders.set(header, value);\r\n\t}\r\n\r\n\t/**\r\n\t * Remves a previously registered global header.\r\n\t *\r\n\t * @param  {String} header The header attribute to remove\r\n\t * @returns {undefined}\r\n\t */\r\n\tstatic removeHeader(header) {\r\n\t\tglobalHeaders = globalHeaders.delete(header);\r\n\t}\r\n}\r\n\r\nfunction addHeaders(req) {\r\n\tglobalHeaders.forEach((value, key) => {\r\n\t\treq.set(key, value);\r\n\t});\r\n}\r\n\r\nexport default Client;\r\n"
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "request",
+    "memberof": "lib/Client.js",
+    "longname": "lib/Client.js~request",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/Client.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "globalHeaders",
+    "memberof": "lib/Client.js",
+    "longname": "lib/Client.js~globalHeaders",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/Client.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "addHeaders",
+    "memberof": "lib/Client.js",
+    "longname": "lib/Client.js~addHeaders",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/Client.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 134,
+    "undocument": true,
+    "params": [
+      {
+        "name": "req",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Client",
+    "memberof": "lib/Client.js",
+    "longname": "lib/Client.js~Client",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/Client.js",
+    "importStyle": "Client",
+    "description": "HTTP client used by the Super-Siren library.  Library utilized [superaget](https://github.com/visionmedia/superagent)\nfor all requests.",
+    "lineNumber": 14,
+    "interface": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "get",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.get",
+    "access": null,
+    "description": "Creates a superagent HTTP get operation",
+    "lineNumber": 21,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "href",
+        "description": "The URL to perform an HTTP get against."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "superagent-promise"
+      ],
+      "spread": false,
+      "description": "superagent get request"
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "put",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.put",
+    "access": null,
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "params": [
+      {
+        "name": "href",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "post",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.post",
+    "access": null,
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "params": [
+      {
+        "name": "href",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "del",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.del",
+    "access": null,
+    "description": null,
+    "lineNumber": 42,
+    "undocument": true,
+    "params": [
+      {
+        "name": "href",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "action",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.action",
+    "access": null,
+    "description": null,
+    "lineNumber": 49,
+    "undocument": true,
+    "params": [
+      {
+        "name": "method",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "href",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "addParser",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.addParser",
+    "access": null,
+    "description": "Registers a content type parser with all client instances.",
+    "lineNumber": 71,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{undefined}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "contentType",
+        "description": "content-type which should be parsed with the provided function\n                                whenever a response is received with this content type."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "parseFunction",
+        "description": "Function to call in order to return response body when response\n                                is encoded with the provided contentType."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "undefined"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "globalHeaders",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.globalHeaders",
+    "access": null,
+    "description": "Returns a Map of current global headers that are added\nfor all clients.",
+    "lineNumber": 108,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Immutable.Map"
+      ],
+      "spread": false,
+      "description": "Immutable map of all currently registered headers"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "addHeader",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.addHeader",
+    "access": null,
+    "description": "Registers a global header to be used by all client instances.",
+    "lineNumber": 119,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{undefined}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "header",
+        "description": "The header attribute to set"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": "The header value to set"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "undefined"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "removeHeader",
+    "memberof": "lib/Client.js~Client",
+    "longname": "lib/Client.js~Client.removeHeader",
+    "access": null,
+    "description": "Remves a previously registered global header.",
+    "lineNumber": 129,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{undefined}"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "header",
+        "description": "The header attribute to remove"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "undefined"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "client",
+    "memberof": "lib/Client.js",
+    "longname": "lib/Client.js~client",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/Client.js",
+    "importStyle": "client",
+    "description": null,
+    "lineNumber": 140,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/Client.js~Client"
+      ]
+    }
+  },
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/LinkedSubEntity.js",
+    "memberof": null,
+    "longname": "lib/LinkedSubEntity.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Immutable from 'immutable';\r\nimport _ from 'lodash';\r\nimport SirenHelpers from './SirenHelpers';\r\n\r\n/**\r\n * Represents an sub-entity of an entity which is represented\r\n * as a URL to the actual entity instance.\r\n */\r\nclass LinkedSubEntity extends Immutable.Record({\r\n\trels: new Immutable.Set(),\r\n\tclasses: new Immutable.Set(),\r\n\thref: null\r\n}) {\r\n\r\n\t/**\r\n\t * Parses the provided json instance and returns\r\n\t * the LinkedSubEntity representation of that json\r\n\t *\r\n\t * @param  {Object} json Object representation of the linked sub-entity\r\n\t * @param  {String} [baseUrl=null] Optional baseUrl to use if the href is a relative URL\r\n\t * @return {LinkedSubEntity}      Parsed representation of the linked sub-entity.\r\n\t */\r\n\tstatic fromJson(json, baseUrl=null) {\r\n\t\tif (!json.rel || !_.isArray(json.rel) || json.rel.length === 0) {\r\n\t\t\tthrow new Error('A rel array with at least one rel is required to create a linked sub entity');\r\n\t\t}\r\n\r\n\t\tif (!json.href) {\r\n\t\t\tthrow new Error('a href is required for a linked sub entity');\r\n\t\t}\r\n\r\n\t\treturn empty.withMutations(map => {\r\n\t\t\tmap.set('rels', new Immutable.Set(json.rel));\r\n\t\t\tmap.set('href', SirenHelpers.processUrl(json.href || map.href, baseUrl));\r\n\t\t\tmap.set('classes', new Immutable.Set(json.class || []));\r\n\t\t});\r\n\t}\r\n\r\n\t/**\r\n\t * Default empty instance of a LinkedSubEntity\r\n\t * @return {LinkedSubEntity} Default empty state\r\n\t */\r\n\tstatic get empty() {\r\n\t\treturn empty;\r\n\t}\r\n}\r\n\r\nvar empty = new LinkedSubEntity();\r\n\r\nexport default LinkedSubEntity;\r\n"
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/LinkedSubEntity.js",
+    "longname": "lib/LinkedSubEntity.js~empty",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/LinkedSubEntity.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 48,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/LinkedSubEntity.js~LinkedSubEntity"
+      ]
+    }
+  },
+  {
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "LinkedSubEntity",
+    "memberof": "lib/LinkedSubEntity.js",
+    "longname": "lib/LinkedSubEntity.js~LinkedSubEntity",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/LinkedSubEntity.js",
+    "importStyle": "LinkedSubEntity",
+    "description": "Represents an sub-entity of an entity which is represented\nas a URL to the actual entity instance.",
+    "lineNumber": 9,
+    "interface": false,
+    "expressionExtends": ""
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "fromJson",
+    "memberof": "lib/LinkedSubEntity.js~LinkedSubEntity",
+    "longname": "lib/LinkedSubEntity.js~LinkedSubEntity.fromJson",
+    "access": null,
+    "description": "Parses the provided json instance and returns\nthe LinkedSubEntity representation of that json",
+    "lineNumber": 23,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "json",
+        "description": "Object representation of the linked sub-entity"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "baseUrl",
+        "description": "Optional baseUrl to use if the href is a relative URL"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "LinkedSubEntity"
+      ],
+      "spread": false,
+      "description": "Parsed representation of the linked sub-entity."
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/LinkedSubEntity.js~LinkedSubEntity",
+    "longname": "lib/LinkedSubEntity.js~LinkedSubEntity.empty",
+    "access": null,
+    "description": "Default empty instance of a LinkedSubEntity",
+    "lineNumber": 43,
+    "return": {
+      "nullable": null,
+      "types": [
+        "LinkedSubEntity"
+      ],
+      "spread": false,
+      "description": "Default empty state"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "linkedSubEntity",
+    "memberof": "lib/LinkedSubEntity.js",
+    "longname": "lib/LinkedSubEntity.js~linkedSubEntity",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/LinkedSubEntity.js",
+    "importStyle": "linkedSubEntity",
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/LinkedSubEntity.js~LinkedSubEntity"
+      ]
+    }
+  },
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/Siren.js",
+    "memberof": null,
+    "longname": "lib/Siren.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Promise from 'bluebird';\r\nimport Immutable from 'immutable';\r\nimport LinkedSubEntity from './LinkedSubEntity';\r\nimport SirenLink from './SirenLink';\r\nimport SirenAction from './SirenAction';\r\nimport _ from 'lodash';\r\nimport Client from './Client';\r\nimport SirenHelpers from './SirenHelpers';\r\n\r\nClient.addParser('application/vnd.siren+json', (text, requestUrl) => Siren.fromJson(JSON.parse(text), requestUrl));\r\n\r\nClient.addHeader('Cache-Control', 'no-cache,no-store,must-revalidate,max-age=-1');\r\nClient.addHeader('Accept', 'application/vnd.siren+json');\r\nClient.addHeader('Content-Type', 'application/json');\r\n\r\nvar client = new Client();\r\n\r\n/**\r\n * @class Siren\r\n * Immutable Siren entity.  This is the main entrypoint for all Siren operations.\r\n */\r\nclass Siren extends Immutable.Record({\r\n\tclasses: Immutable.Set(),\r\n\tproperties: Immutable.Map(),\r\n\tentities: Immutable.Set(),\r\n\tactions: Immutable.Map(),\r\n\tlinks: Immutable.Set()\r\n}) {\r\n\tconstructor(args) {\r\n\t\tif (!args && Siren.empty) {\r\n\t\t\treturn Siren.empty;\r\n\t\t}\r\n\t\telse {\r\n\t\t\tsuper(args);\r\n\t\t}\r\n\t}\r\n\r\n\t/**\r\n\t * Finds the @see {@link SirenAction} referenced by the provided rel.\r\n\t *\r\n\t * @param  {String} name The name of the action to find.\r\n\t * @return {SirenAction} SirenAction matching the requested name.  null if none is found.\r\n\t */\r\n\tfindActionByName(name) {\r\n\t\treturn this.actions.get(name) || null;\r\n\t}\r\n\r\n\t/**\r\n\t * Finds the first @See {@link SirenLink} referenced by the provided rel.\r\n\t *\r\n\t * @param  {String} rel The relation to this Siren entity for the requested link.\r\n\t * @return {SirenLink}     SirenLink matching the requested rel.  null if none is found.\r\n\t */\r\n\tfindLinkByRel(rel) {\r\n\t\treturn this.links.filter(link => link.rels.contains(rel)).first() || null;\r\n\t}\r\n\r\n\t/**\r\n\t * Finds the @See {@link EmbeddedSubEntity}|{@link LinkedSubEntity} entities referenced by the provided rel.\r\n\t *\r\n\t * @param  {String} rel The relation to this Siren entity for the requested sub-entity.\r\n\t * @return {Immutable.Set}  Set of sub-entities matching the requested rel.\r\n\t */\r\n\tfindEntitiesByRel(rel) {\r\n\t\treturn this.entities.filter(item => item.rels.contains(rel));\r\n\t}\r\n\r\n\t/**\r\n\t * Returns the sub-entities on this Siren object which are embedded sub-entities.\r\n\t *\r\n\t * @return {Immutable.Set}     Set of embedded sub-entities.\r\n\t */\r\n\tget embeddedEntities() {\r\n\t\treturn this.entities\r\n\t\t\t.filter(item => item instanceof EmbeddedSubEntity)\r\n\t\t\t.toSet();\r\n\t}\r\n\r\n\t/**\r\n\t * Returns the sub-entities on this Siren object which are embedded sub-entities.\r\n\t *\r\n\t * @param  {String} rel \tOnly entities with a relation to the parent siren matching this should be returned.\r\n\t * @return {Immutable.Set}  Set of embedded sub-entities which match thes provided rel.\r\n\t */\r\n\tembeddedEntitiesByRel(rel) {\r\n\t\treturn this.embeddedEntities\r\n\t\t\t.filter(item => item.rels.contains(rel));\r\n\t}\r\n\r\n\t/**\r\n\t * Returns the sub-entities on the Siren object which are linked sub-entities.\r\n\t *\r\n\t * @return {Immutable.Set}     Set of linked sub-entities on this Siren object.\r\n\t */\r\n\tget linkedEntities() {\r\n\t\treturn this.entities\r\n\t\t\t.filter(item => item instanceof LinkedSubEntity)\r\n\t\t\t.toSet();\r\n\t}\r\n\r\n\t/**\r\n\t * Returns the set of linked sub-entities on the Siren object which match the requested rel.\r\n\t *\r\n\t * @param  {String} rel     Only entities with this relation to the parent siren should be returned.\r\n\t * @return {Immutable.Set}  Set of linked sub-entities which match the provided rel.\r\n\t */\r\n\tlinkedEntitiesByRel(rel) {\r\n\t\treturn this.linkedEntities\r\n\t\t\t.filter(item => item.rels.contains(rel));\r\n\t}\r\n\r\n\t/**\r\n\t * Returns the self link for this entity\r\n\t *\r\n\t * @return {SirenLink} link represented by the self rel, null if no self link is found.\r\n\t */\r\n\tget selfLink() {\r\n\t\treturn this.findLinkByRel('self');\r\n\t}\r\n\r\n\t//TODO: add a validate method and use it while parsing\r\n\t/**\r\n\t * Parses a JSON representation of a Siren entity\r\n\t * and returns the Siren representation.\r\n\t * @param {Object} [obj] The JSON object to be parsed as Siren\r\n\t * @param {String} [baseUrl=null] Optional base URL to use for relative URL parsing\r\n\t * @return {Siren} Parsed Siren entity\r\n\t */\r\n\tstatic fromJson(obj, baseUrl = null) {\r\n\t\treturn Siren.empty.withMutations(map => {\r\n\t\t\tmap.set('classes', map.classes.union(obj.class ? Immutable.fromJS(obj.class) : new Immutable.List()));\r\n\r\n\t\t\tfor (var key in obj.properties) {\r\n\t\t\t\tmap.set('properties', map.properties.set(key, obj.properties[key]));\r\n\t\t\t}\r\n\r\n\t\t\tmap.set('links',\r\n\t\t\t\tnew Immutable.Set(\r\n\t\t\t\t\t_.map(obj.links || [], (item) => new SirenLink(item.rel, SirenHelpers.processUrl(item.href, baseUrl)))\r\n\t\t\t\t)\r\n\t\t\t);\r\n\r\n\t\t\tmap.set('actions',\r\n\t\t\t\tnew Immutable.Map(\r\n\t\t\t\t\t_.map(obj.actions || [], (item) => SirenAction.fromJson(item, baseUrl))\r\n\t\t\t\t\t.map(action => [action.name, action])\r\n\t\t\t\t)\r\n\t\t\t);\r\n\r\n\t\t\tmap.set('entities',\r\n\t\t\t\tnew Immutable.Set(\r\n\t\t\t\t\t_.map(obj.entities || [], (item) => item.href ? LinkedSubEntity.fromJson(item, baseUrl) : EmbeddedSubEntity.fromJson(item, baseUrl))\r\n\t\t\t\t)\r\n\t\t\t);\r\n\t\t});\r\n\t}\r\n\r\n\t/**\r\n\t * Returns an empty siren representation.  This Siren entity\r\n\t * contains no afforances.\r\n\t * @return {Siren} Empty siren structure\r\n\t */\r\n\tstatic get empty() {\r\n\t\treturn emptySiren;\r\n\t}\r\n\r\n\t/**\r\n\t * Returns a Superagent Promise instance which will perform an HTTP Get against\r\n\t * the provided href returning the response as a SuperAgent response.\r\n\t * If the response is Siren ('application/vnd.siren+json'),\r\n\t * then the body should be a Siren instance.\r\n\t *\r\n\t * @param {String} href The URL to perform an HTTP get against\r\n\t * @return {superagent-promise} Superagent Promise Object\r\n\t */\r\n\tstatic get(href) {\r\n\t\treturn Client.get(href);\r\n\t}\r\n}\r\n\r\nvar emptySiren = new Siren();\r\n\r\n/**\r\n * @class EmbeddedSubEntity\r\n * Entity which has been embedded within a parent Siren instance.\r\n *\r\n * @param {Array} options.rels: new Immutable.Set() array of strings to identify how this\r\n *                              embedded entity is related to it's parent.\r\n * @param {Object} options.entity: Siren.empty embedded entity instance\r\n */\r\nclass EmbeddedSubEntity extends Immutable.Record({\r\n\trels: new Immutable.Set(),\r\n\tentity: Siren.empty\r\n}) {\r\n\t/**\r\n\t * Parses the provided JSON representation of the Siren sub entity\r\n\t * into an instance of an EmbeddedSubEntity.\r\n\t *\r\n\t * @param  {Object} json           The JSON representation of a siren embedded sub entity.\r\n\t * @param  {String} [baseUrl=null] Optional base URL to use in case URLs are relative URLs.\r\n\t * @return {EmbeddedSubEntity}     The representation of the parsed JSON.\r\n\t */\r\n\tstatic fromJson(json, baseUrl=null) {\r\n\t\tif (!json.rel || !_.isArray(json.rel) || json.rel.length === 0) {\r\n\t\t\tthrow new Error('A rel array is required to parse an embedded sub entity');\r\n\t\t}\r\n\r\n\t\treturn EmbeddedSubEntity.empty.withMutations(map => {\r\n\t\t\tmap.set('rels', new Immutable.Set(json.rel));\r\n\t\t\tmap.set('entity', Siren.fromJson(json, baseUrl));\r\n\t\t});\r\n\t}\r\n\r\n\t/**\r\n\t * Returns the default empty instance of an EmbeddedSubEntity.\r\n\t *\r\n\t * @return {EmbeddedSubEntity} default dembedded sub entity.\r\n\t */\r\n\tstatic get empty() {\r\n\t\treturn emptyEmbedded;\r\n\t}\r\n}\r\n\r\nvar emptyEmbedded = new EmbeddedSubEntity();\r\n\r\nSiren.Link = SirenLink;\r\nSiren.Action = SirenAction;\r\nSiren.LinkedSubEntity = LinkedSubEntity;\r\nSiren.EmbeddedSubEntity = EmbeddedSubEntity;\r\nSiren.Client = Client;\r\n\r\nSiren.Helper = SirenHelpers;\r\n\r\nexport default Siren;\r\n"
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "client",
+    "memberof": "lib/Siren.js",
+    "longname": "lib/Siren.js~client",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/Siren.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/Client~Client"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "emptySiren",
+    "memberof": "lib/Siren.js",
+    "longname": "lib/Siren.js~emptySiren",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/Siren.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 181,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/Siren.js~Siren"
+      ]
+    }
+  },
+  {
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "EmbeddedSubEntity",
+    "memberof": "lib/Siren.js",
+    "longname": "lib/Siren.js~EmbeddedSubEntity",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/Siren.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 191,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": "EmbeddedSubEntity\nEntity which has been embedded within a parent Siren instance."
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.rels:",
+        "description": "new Immutable.Set() array of strings to identify how this\n                             embedded entity is related to it's parent."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.entity:",
+        "description": "Siren.empty embedded entity instance"
+      }
+    ],
+    "interface": false,
+    "expressionExtends": ""
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "fromJson",
+    "memberof": "lib/Siren.js~EmbeddedSubEntity",
+    "longname": "lib/Siren.js~EmbeddedSubEntity.fromJson",
+    "access": null,
+    "description": "Parses the provided JSON representation of the Siren sub entity\ninto an instance of an EmbeddedSubEntity.",
+    "lineNumber": 203,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "json",
+        "description": "The JSON representation of a siren embedded sub entity."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "baseUrl",
+        "description": "Optional base URL to use in case URLs are relative URLs."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "EmbeddedSubEntity"
+      ],
+      "spread": false,
+      "description": "The representation of the parsed JSON."
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/Siren.js~EmbeddedSubEntity",
+    "longname": "lib/Siren.js~EmbeddedSubEntity.empty",
+    "access": null,
+    "description": "Returns the default empty instance of an EmbeddedSubEntity.",
+    "lineNumber": 219,
+    "return": {
+      "nullable": null,
+      "types": [
+        "EmbeddedSubEntity"
+      ],
+      "spread": false,
+      "description": "default dembedded sub entity."
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "emptyEmbedded",
+    "memberof": "lib/Siren.js",
+    "longname": "lib/Siren.js~emptyEmbedded",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/Siren.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 224,
+    "undocument": true,
+    "type": {
+      "types": [
+        "EmbeddedSubEntity"
+      ]
+    }
+  },
+  {
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Siren",
+    "memberof": "lib/Siren.js",
+    "longname": "lib/Siren.js~Siren",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/Siren.js",
+    "importStyle": "Siren",
+    "description": null,
+    "lineNumber": 22,
+    "unknown": [
+      {
+        "tagName": "@class",
+        "tagValue": "Siren\nImmutable Siren entity.  This is the main entrypoint for all Siren operations."
+      }
+    ],
+    "interface": false,
+    "expressionExtends": ""
+  },
+  {
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "params": [
+      {
+        "name": "args",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "findActionByName",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#findActionByName",
+    "access": null,
+    "description": "Finds the @see {@link SirenAction} referenced by the provided rel.",
+    "lineNumber": 44,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "The name of the action to find."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SirenAction"
+      ],
+      "spread": false,
+      "description": "SirenAction matching the requested name.  null if none is found."
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "findLinkByRel",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#findLinkByRel",
+    "access": null,
+    "description": "Finds the first @See {@link SirenLink} referenced by the provided rel.",
+    "lineNumber": 54,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rel",
+        "description": "The relation to this Siren entity for the requested link."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SirenLink"
+      ],
+      "spread": false,
+      "description": "SirenLink matching the requested rel.  null if none is found."
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "findEntitiesByRel",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#findEntitiesByRel",
+    "access": null,
+    "description": "Finds the @See {@link EmbeddedSubEntity}|{@link LinkedSubEntity} entities referenced by the provided rel.",
+    "lineNumber": 64,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rel",
+        "description": "The relation to this Siren entity for the requested sub-entity."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Immutable.Set"
+      ],
+      "spread": false,
+      "description": "Set of sub-entities matching the requested rel."
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "embeddedEntities",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#embeddedEntities",
+    "access": null,
+    "description": "Returns the sub-entities on this Siren object which are embedded sub-entities.",
+    "lineNumber": 73,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Immutable.Set"
+      ],
+      "spread": false,
+      "description": "Set of embedded sub-entities."
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "embeddedEntitiesByRel",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#embeddedEntitiesByRel",
+    "access": null,
+    "description": "Returns the sub-entities on this Siren object which are embedded sub-entities.",
+    "lineNumber": 85,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rel",
+        "description": "Only entities with a relation to the parent siren matching this should be returned."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Immutable.Set"
+      ],
+      "spread": false,
+      "description": "Set of embedded sub-entities which match thes provided rel."
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "linkedEntities",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#linkedEntities",
+    "access": null,
+    "description": "Returns the sub-entities on the Siren object which are linked sub-entities.",
+    "lineNumber": 95,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Immutable.Set"
+      ],
+      "spread": false,
+      "description": "Set of linked sub-entities on this Siren object."
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "linkedEntitiesByRel",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#linkedEntitiesByRel",
+    "access": null,
+    "description": "Returns the set of linked sub-entities on the Siren object which match the requested rel.",
+    "lineNumber": 107,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rel",
+        "description": "Only entities with this relation to the parent siren should be returned."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Immutable.Set"
+      ],
+      "spread": false,
+      "description": "Set of linked sub-entities which match the provided rel."
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "selfLink",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren#selfLink",
+    "access": null,
+    "description": "Returns the self link for this entity",
+    "lineNumber": 117,
+    "return": {
+      "nullable": null,
+      "types": [
+        "SirenLink"
+      ],
+      "spread": false,
+      "description": "link represented by the self rel, null if no self link is found."
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "fromJson",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren.fromJson",
+    "access": null,
+    "description": "Parses a JSON representation of a Siren entity\nand returns the Siren representation.",
+    "lineNumber": 129,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "obj",
+        "description": "The JSON object to be parsed as Siren"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "null",
+        "defaultRaw": null,
+        "name": "baseUrl",
+        "description": "Optional base URL to use for relative URL parsing"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Siren"
+      ],
+      "spread": false,
+      "description": "Parsed Siren entity"
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren.empty",
+    "access": null,
+    "description": "Returns an empty siren representation.  This Siren entity\ncontains no afforances.",
+    "lineNumber": 163,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Siren"
+      ],
+      "spread": false,
+      "description": "Empty siren structure"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "get",
+    "memberof": "lib/Siren.js~Siren",
+    "longname": "lib/Siren.js~Siren.get",
+    "access": null,
+    "description": "Returns a Superagent Promise instance which will perform an HTTP Get against\nthe provided href returning the response as a SuperAgent response.\nIf the response is Siren ('application/vnd.siren+json'),\nthen the body should be a Siren instance.",
+    "lineNumber": 176,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "href",
+        "description": "The URL to perform an HTTP get against"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "superagent-promise"
+      ],
+      "spread": false,
+      "description": "Superagent Promise Object"
+    },
+    "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "siren",
+    "memberof": "lib/Siren.js",
+    "longname": "lib/Siren.js~siren",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/Siren.js",
+    "importStyle": "siren",
+    "description": null,
+    "lineNumber": 234,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/Siren.js~Siren"
+      ]
+    }
+  },
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/SirenAction.js",
+    "memberof": null,
+    "longname": "lib/SirenAction.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import _ from 'lodash';\r\nimport Immutable from 'immutable';\r\nimport ActionField from './ActionField';\r\nimport Client from './Client';\r\nimport SirenHelpers from './SirenHelpers';\r\n\r\n/**\r\n * Representation of a Siren action, which allows a state within a Siren Hypermedia API\r\n * to transition to a new state.\r\n *\r\n * @param {String} options.name:   null                                [description]\r\n * @param {String} options.title:  null                                [description]\r\n * @param {String} options.method: 'GET'                               [description]\r\n * @param {String} options.href:   null                                [description]\r\n * @param {String} options.type:   'application/x-www-form-urlencoded' [description]\r\n * @param {Immutable.Map} options.fields: new Immutable.Map()          [description]\r\n */\r\nclass SirenAction extends Immutable.Record({\r\n\tname: null,\r\n\ttitle: null,\r\n\tmethod: 'GET',\r\n\thref: null,\r\n\ttype: 'application/x-www-form-urlencoded',\r\n\tfields: new Immutable.Map()\r\n}) {\r\n\t/**\r\n\t * Performs the action specified by this Action.\r\n\t *\r\n\t * @param  {Object} data Data to be sent as part of this action\r\n\t * @return {superagent-promise} superagent promise representing the HTTP request to perform this action\r\n\t */\r\n\tperform(data) {\r\n\t\tvar req = Client.action(this.method, this.href);\r\n\r\n\t\tif (this.type) {\r\n\t\t\treq.type(this.type);\r\n\t\t}\r\n\r\n\t\tvar payload = { };\r\n\r\n\t\tthis.fields.filter(f => f.value !== null).forEach(f => payload[f.name] = f.value);\r\n\t\tImmutable.fromJS(data).forEach((value, key) => payload[key] = value);\r\n\r\n\t\tif (this.method === 'get') {\r\n\t\t\treq.query(payload);\r\n\t\t}\r\n\t\telse {\r\n\t\t\treq.send(payload);\r\n\t\t}\r\n\r\n\t\treturn req;\r\n\t}\r\n\r\n\t/**\r\n\t * Creates a SirenAction instance based on the provided\r\n\t * JSON object structure.\r\n\t *\r\n\t * @param  {Object} json      Object which matches the Siren JSON structure.\r\n\t * @param  {String} [baseUrl] optional url to use as the base URL for all parsed URLs\r\n\t * @return {SirenAction}      Result of parsing the provided JSON object.\r\n\t */\r\n\tstatic fromJson(json, baseUrl) {\r\n\t\tif (!json.name) {\r\n\t\t\tthrow new Error('\"name\" is requires on an action');\r\n\t\t}\r\n\r\n\t\treturn empty.withMutations(map => {\r\n\t\t\tmap.set('name', json.name || map.name);\r\n\t\t\tmap.set('title', json.title || map.title);\r\n\t\t\tmap.set('method', json.method || map.method);\r\n\t\t\tmap.set('href', SirenHelpers.processUrl(json.href || map.href, baseUrl));\r\n\t\t\tmap.set('type', json.type || map.type);\r\n\t\t\tmap.set('fields', new Immutable.Map(_.map(json.fields || [], f => ActionField.fromJson(f)).map(af => [af.name, af])));\r\n\t\t});\r\n\t}\r\n\r\n\t/**\r\n\t * Default state for a SirenAction.  This has the defaults set and nothing\r\n\t * else.\r\n\t *\r\n\t * @return {SirenAction} Siren Action which is created as a result of parsing\r\n\t *                             the provided JSON.\r\n\t */\r\n\tstatic get empty() {\r\n\t\treturn empty;\r\n\t}\r\n}\r\n\r\nvar empty = new SirenAction();\r\n\r\nexport default SirenAction;\r\n"
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/SirenAction.js",
+    "longname": "lib/SirenAction.js~empty",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/SirenAction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 89,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/SirenAction.js~SirenAction"
+      ]
+    }
+  },
+  {
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "SirenAction",
+    "memberof": "lib/SirenAction.js",
+    "longname": "lib/SirenAction.js~SirenAction",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/SirenAction.js",
+    "importStyle": "SirenAction",
+    "description": "Representation of a Siren action, which allows a state within a Siren Hypermedia API\nto transition to a new state.",
+    "lineNumber": 18,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.name:",
+        "description": "null                                [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.title:",
+        "description": "null                                [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.method:",
+        "description": "'GET'                               [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.href:",
+        "description": "null                                [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.type:",
+        "description": "'application/x-www-form-urlencoded' [description]"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Immutable.Map"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options.fields:",
+        "description": "new Immutable.Map()          [description]"
+      }
+    ],
+    "interface": false,
+    "expressionExtends": ""
+  },
+  {
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "perform",
+    "memberof": "lib/SirenAction.js~SirenAction",
+    "longname": "lib/SirenAction.js~SirenAction#perform",
+    "access": null,
+    "description": "Performs the action specified by this Action.",
+    "lineNumber": 32,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "Data to be sent as part of this action"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "superagent-promise"
+      ],
+      "spread": false,
+      "description": "superagent promise representing the HTTP request to perform this action"
+    },
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "fromJson",
+    "memberof": "lib/SirenAction.js~SirenAction",
+    "longname": "lib/SirenAction.js~SirenAction.fromJson",
+    "access": null,
+    "description": "Creates a SirenAction instance based on the provided\nJSON object structure.",
+    "lineNumber": 62,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "json",
+        "description": "Object which matches the Siren JSON structure."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "baseUrl",
+        "description": "optional url to use as the base URL for all parsed URLs"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "SirenAction"
+      ],
+      "spread": false,
+      "description": "Result of parsing the provided JSON object."
+    },
+    "generator": false
+  },
+  {
+    "kind": "get",
+    "static": true,
+    "variation": null,
+    "name": "empty",
+    "memberof": "lib/SirenAction.js~SirenAction",
+    "longname": "lib/SirenAction.js~SirenAction.empty",
+    "access": null,
+    "description": "Default state for a SirenAction.  This has the defaults set and nothing\nelse.",
+    "lineNumber": 84,
+    "return": {
+      "nullable": null,
+      "types": [
+        "SirenAction"
+      ],
+      "spread": false,
+      "description": "Siren Action which is created as a result of parsing\n                            the provided JSON."
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "sirenAction",
+    "memberof": "lib/SirenAction.js",
+    "longname": "lib/SirenAction.js~sirenAction",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/SirenAction.js",
+    "importStyle": "sirenAction",
+    "description": null,
+    "lineNumber": 91,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/SirenAction.js~SirenAction"
+      ]
+    }
+  },
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/SirenHelpers.js",
+    "memberof": null,
+    "longname": "lib/SirenHelpers.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Client from './Client';\r\nimport Uri from 'urijs';\r\n\r\n/**\r\n * Follows the Siren model's link by the provided rel.\r\n *\r\n * @param  {String} rel how the requested link is related to the result siren we are following.\r\n * @return {Promise}     Promise which resolves to a superagent response\r\n */\r\nfunction follow(rel) {\r\n\treturn (res) => {\r\n\t\tvar link = res.body.findLinkByRel(rel)\r\n\t\t\t|| res.body.linkedEntitiesByRel(rel).map(item => item.href).first()\r\n\t\t\t|| res.body.embeddedEntitiesByRel(rel).map(item => item.entity.selfLink).first();\r\n\r\n\t\tif (!link) {\r\n\t\t\tthrow new Error('No link found for provided rel', {rel});\r\n\t\t}\r\n\r\n\t\treturn link.follow();\r\n\t};\r\n}\r\n\r\n/**\r\n * Performs the action identified by the provided actionName using the provided data.\r\n *\r\n * @param  {String} name       The name that identifies the action to take\r\n * @param  {Object} data       The data to send on the action\r\n * @return {Promise}           Promise which resolves to a superagent response\r\n */\r\nfunction performAction(name, data) {\r\n\treturn (res) => {\r\n\t\tvar action = res.body.findActionByName(name);\r\n\r\n\t\tif (!action) {\r\n\t\t\tthrow new Error('No action found for the provided name', {name});\r\n\t\t}\r\n\r\n\t\treturn action.perform(data);\r\n\t};\r\n}\r\n\r\n/**\r\n * Processes the provided url and computes the absolute URL provided\r\n * the url and optional baseUrl.\r\n *\r\n * @param  {String} url          The URL to process\r\n * @param  {String} [baseUrl]    Optional base URL to compute the absolute URL relative to.\r\n * @return {String}              Absolute URL\r\n */\r\nfunction processUrl(url, baseUrl) {\r\n\tvar returnVal = null;\r\n\r\n\tif (url && url.length > 0) {\r\n\t\tvar uri = new Uri(url);\r\n\r\n\t\tif (baseUrl) {\r\n\t\t\turi = uri.absoluteTo(baseUrl);\r\n\t\t}\r\n\r\n\t\treturnVal = uri.toString();\r\n\t}\r\n\r\n\treturn returnVal;\r\n}\r\n\r\nexport default {\r\n\tfollow,\r\n\tperformAction,\r\n\tprocessUrl\r\n};\r\n"
+  },
+  {
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "follow",
+    "memberof": "lib/SirenHelpers.js",
+    "longname": "lib/SirenHelpers.js~follow",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/SirenHelpers.js",
+    "importStyle": null,
+    "description": "Follows the Siren model's link by the provided rel.",
+    "lineNumber": 10,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rel",
+        "description": "how the requested link is related to the result siren we are following."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise which resolves to a superagent response"
+    },
+    "generator": false
+  },
+  {
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "performAction",
+    "memberof": "lib/SirenHelpers.js",
+    "longname": "lib/SirenHelpers.js~performAction",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/SirenHelpers.js",
+    "importStyle": null,
+    "description": "Performs the action identified by the provided actionName using the provided data.",
+    "lineNumber": 31,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "The name that identifies the action to take"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "The data to send on the action"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "Promise which resolves to a superagent response"
+    },
+    "generator": false
+  },
+  {
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "processUrl",
+    "memberof": "lib/SirenHelpers.js",
+    "longname": "lib/SirenHelpers.js~processUrl",
+    "access": null,
+    "export": false,
+    "importPath": "super-siren/lib/SirenHelpers.js",
+    "importStyle": null,
+    "description": "Processes the provided url and computes the absolute URL provided\nthe url and optional baseUrl.",
+    "lineNumber": 51,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "url",
+        "description": "The URL to process"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "baseUrl",
+        "description": "Optional base URL to compute the absolute URL relative to."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "Absolute URL"
+    },
+    "generator": false
+  },
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/SirenLink.js",
+    "memberof": null,
+    "longname": "lib/SirenLink.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Immutable from 'immutable';\r\nimport Client from './Client';\r\n\r\n/**\r\n * Siren link used to describe navigation through a siren entity graph.\r\n *\r\n * @property {Immutable.Set} rels - set of all rels which describe this link.\r\n * @property {String} href URL - that this link refers to.\r\n */\r\nclass SirenLink extends Immutable.Record({\r\n\t/**\r\n\t * @member {Immutable.Set}\r\n\t */\r\n\trels: new Immutable.Set(),\r\n\thref: null\r\n}) {\r\n\t/**\r\n\t * Constructs a new SirenLink based on the provided rels and href values.\r\n\t *\r\n\t * @param  {Array.<String>} rels - array of rel values for this link\r\n\t * @param  {String} href - URL that this link refers to.\r\n\t */\r\n\tconstructor(rels, href) {\r\n\t\tsuper({rels: new Immutable.Set(rels), href: href});\r\n\t}\r\n\r\n\t/**\r\n\t * Perhaps an HTTP Get against the href represented by this Link.\r\n\t *\r\n\t * @return {superagent-promise} superagent request as a with a promise wrapper\r\n\t */\r\n\tfollow() {\r\n\t\treturn Client.get(this.href);\r\n\t}\r\n}\r\n\r\nexport default SirenLink;\r\n"
+  },
+  {
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "SirenLink",
+    "memberof": "lib/SirenLink.js",
+    "longname": "lib/SirenLink.js~SirenLink",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/SirenLink.js",
+    "importStyle": "SirenLink",
+    "description": "Siren link used to describe navigation through a siren entity graph.",
+    "lineNumber": 10,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "Immutable.Set"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rels",
+        "description": "set of all rels which describe this link."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "href",
+        "description": "URL - that this link refers to."
+      }
+    ],
+    "interface": false,
+    "expressionExtends": ""
+  },
+  {
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "lib/SirenLink.js~SirenLink",
+    "longname": "lib/SirenLink.js~SirenLink#constructor",
+    "access": null,
+    "description": "Constructs a new SirenLink based on the provided rels and href values.",
+    "lineNumber": 23,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Array.<String>"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rels",
+        "description": "array of rel values for this link"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "href",
+        "description": "URL that this link refers to."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "follow",
+    "memberof": "lib/SirenLink.js~SirenLink",
+    "longname": "lib/SirenLink.js~SirenLink#follow",
+    "access": null,
+    "description": "Perhaps an HTTP Get against the href represented by this Link.",
+    "lineNumber": 32,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "superagent-promise"
+      ],
+      "spread": false,
+      "description": "superagent request as a with a promise wrapper"
+    },
+    "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "sirenLink",
+    "memberof": "lib/SirenLink.js",
+    "longname": "lib/SirenLink.js~sirenLink",
+    "access": null,
+    "export": true,
+    "importPath": "super-siren/lib/SirenLink.js",
+    "importStyle": "sirenLink",
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "type": {
+      "types": [
+        "lib/SirenLink.js~SirenLink"
+      ]
+    }
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  }
+]

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">lib/Client.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/JChapman202/super-siren.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div data-ice="classWrap">
+  <h2>Class</h2>
+  <ul>
+    
+  <li data-ice="classDoc"><span><a href="class/lib/ActionField.js~ActionField.html">ActionField</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Client.js~Client.html">Client</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/LinkedSubEntity.js~LinkedSubEntity.html">LinkedSubEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Siren.js~Siren.html">Siren</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/SirenAction.js~SirenAction.html">SirenAction</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/SirenLink.js~SirenLink.html">SirenLink</a></span></li>
+</ul>
+</div>
+
+
+
+
+
+<div data-ice="variableWrap">
+  <h2><a href="variable/">Variable</a></h2>
+  <ul>
+    
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-actionField">actionField</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-client">client</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-linkedSubEntity">linkedSubEntity</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-siren">siren</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-sirenAction">sirenAction</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-sirenLink">sirenLink</a></span></li>
+</ul>
+</div>
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/Client.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Immutable from &apos;immutable&apos;;
+import superagent from &apos;superagent&apos;;
+import bluebird from &apos;bluebird&apos;;
+import Uri from &apos;urijs&apos;;
+
+var request = require(&apos;superagent-promise&apos;)(superagent, bluebird);
+
+var globalHeaders = new Immutable.Map();
+
+/**
+ * HTTP client used by the Super-Siren library.  Library utilized [superaget](https://github.com/visionmedia/superagent)
+ * for all requests.
+ */
+class Client {
+	/**
+	 * Creates a superagent HTTP get operation
+	 *
+	 * @param {String} href The URL to perform an HTTP get against.
+	 * @return {superagent-promise} superagent get request
+	 */
+	static get(href) {
+		var req = request.get(href);
+		addHeaders(req);
+
+		return req;
+	}
+
+	static put(href) {
+		var req = request.put(href);
+		addHeaders(req);
+
+		return req;
+	}
+
+	static post(href) {
+		var req = request.post(href);
+		addHeaders(req);
+
+		return req;
+	}
+
+	static del(href) {
+		var req = request.del(href);
+		addHeaders(req);
+
+		return req;
+	}
+
+	static action(method, href) {
+		method = (method || &apos;get&apos;).toLowerCase();
+
+		if (method === &apos;delete&apos;) {
+			method = &apos;del&apos;;
+		}
+
+		var req = request[method](href);
+		addHeaders(req);
+
+		return req;
+	}
+
+	/**
+	 * Registers a content type parser with all client instances.
+	 *
+	 * @param {String} contentType     content-type which should be parsed with the provided function
+	 *                                 whenever a response is received with this content type.
+	 * @param {Function} parseFunction Function to call in order to return response body when response
+	 *                                 is encoded with the provided contentType.
+	 * @returns {undefined}
+	 */
+	static addParser(contentType, parseFunction) {
+		superagent.parse[contentType] = (res, done) =&gt; {
+			//TODO: cannot assume http
+			var baseUrl = null;
+
+			if (res.req &amp;&amp; res.req._headers &amp;&amp; res.req._headers.host) {
+				baseUrl = new Uri({protocol: &apos;http&apos;, hostname: res.req._headers.host}).toString();
+				baseUrl = new Uri(res.req.path).absoluteTo(baseUrl).toString();
+			}
+
+			res.text = &apos;&apos;;
+			res.setEncoding(&apos;utf8&apos;);
+			res.on(&apos;data&apos;, chunk =&gt; {res.text += chunk;});
+			res.on(&apos;end&apos;, () =&gt; {
+				var err = null;
+				var body = null;
+
+				try {
+					var text = res.text &amp;&amp; res.text.replace(/^\s*|\s*$/g, &apos;&apos;);
+					body = text &amp;&amp; parseFunction(text, baseUrl);
+				}
+				catch(e) {
+					err = e;
+				}
+				finally {
+					done(err, body);
+				}
+			});
+		};
+	}
+
+	/**
+	 * Returns a Map of current global headers that are added
+	 * for all clients.
+	 *
+	 * @return {Immutable.Map} Immutable map of all currently registered headers
+	 */
+	static get globalHeaders() {
+		return globalHeaders;
+	}
+
+	/**
+	 * Registers a global header to be used by all client instances.
+	 *
+	 * @param {String} header The header attribute to set
+	 * @param {String} value The header value to set
+	 * @returns {undefined}
+	 */
+	static addHeader(header, value) {
+		globalHeaders = globalHeaders.set(header, value);
+	}
+
+	/**
+	 * Remves a previously registered global header.
+	 *
+	 * @param  {String} header The header attribute to remove
+	 * @returns {undefined}
+	 */
+	static removeHeader(header) {
+		globalHeaders = globalHeaders.delete(header);
+	}
+}
+
+function addHeaders(req) {
+	globalHeaders.forEach((value, key) =&gt; {
+		req.set(key, value);
+	});
+}
+
+export default Client;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.6)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
