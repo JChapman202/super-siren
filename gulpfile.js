@@ -47,7 +47,7 @@ gulp.task('docs', function() {
 
 gulp.task('ghpage-docs', ['docs'], function() {
 	return gulp.src('./docs/**/*')
-		.pipe(ghPages());
+		.pipe(ghPages({cacheDir: '../super-siren-docs', push: false}));
 });
 
 gulp.task('watch', function() {
