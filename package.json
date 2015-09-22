@@ -14,7 +14,10 @@
   "keywords": [
     "Hypermedia",
     "Siren",
-    "REST"
+    "REST",
+    "API client",
+    "Immutable.js",
+    "superagent"
   ],
   "author": "John Chapman",
   "license": "MIT",
