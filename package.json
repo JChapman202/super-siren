@@ -1,6 +1,6 @@
 {
   "name": "super-siren",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Siren client based built on top of superagent",
   "main": "dist/index.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "prepublish": "gulp build"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/JChapman202/super-siren.git"
+    "type": "git",
+    "url": "https://github.com/JChapman202/super-siren.git"
   },
   "keywords": [
     "Hypermedia",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.23",
+    "babel-runtime": "^5.8.24",
     "bluebird": "^2.10.0",
     "immutable": "^3.7.5",
     "lodash": "^3.10.1",
