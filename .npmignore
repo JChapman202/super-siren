@@ -1,0 +1,7 @@
+node_modules/
+lib/
+test/
+.eslintrc
+.gitignore
+gulpfile.js
+index.js
