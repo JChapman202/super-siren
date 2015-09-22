@@ -5,6 +5,9 @@ var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var clean = require('gulp-clean');
+var esdoc = require('gulp-esdoc');
+var ghPages = require('gulp-gh-pages');
+
 require('babel/register');
 
 gulp.task('clean', function() {
@@ -35,6 +38,16 @@ gulp.task('test', function() {
 			},
 			reporter: 'spec'
 		}));
+});
+
+gulp.task('docs', function() {
+	return gulp.src(['./lib'])
+		.pipe(esdoc({destination: './docs'}));
+});
+
+gulp.task('ghpage-docs', ['docs'], function() {
+	return gulp.src('./docs/**/*')
+		.pipe(ghPages());
 });
 
 gulp.task('watch', function() {
