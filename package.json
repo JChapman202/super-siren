@@ -7,6 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "gulp build"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/JChapman202/super-siren.git"
+  },
   "keywords": [
     "Hypermedia",
     "Siren",
