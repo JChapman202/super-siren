@@ -6,6 +6,10 @@
 
 Siren models within this library are created using [Immutable.js](https://github.com/facebook/immutable-js) Records with properties constructed using Immutable maps, sets and lists.
 
+## Links ##
+
+[API docs](http://jchapman202.github.io/super-siren/)
+
 ## Getting Started ##
 
 Install `super-siren` using npm.
