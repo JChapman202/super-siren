@@ -1,6 +1,6 @@
 {
   "name": "super-siren",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Siren client based built on top of superagent",
   "main": "dist/index.js",
   "scripts": {
