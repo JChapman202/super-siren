@@ -147,7 +147,7 @@ describe('Siren', () => {
 				describe('When a link has a single rel', () => {
 					beforeEach(() => {
 						json.links = [
-							{ rel: ['a'], href: 'http://this.com' }
+							{ rel: ['a'], class: ['x', 'y'], href: 'http://this.com' }
 						];
 
 						act();
@@ -155,6 +155,10 @@ describe('Siren', () => {
 
 					it('Should construct a SirenLink instance for the provided link', () => {
 						expect(siren.links.filter(link => link.rels.contains('a')).first()).not.to.be.null;
+					});
+
+					it('Should construct a SirenLink containing the classes of the link JSON', () => {
+						expect(siren.links.filter(link => link.rels.contains('a')).first().classes.toJS()).to.contain('x');
 					});
 
 					it('Should allow for retrieval of the SirenLink by rel', () => {

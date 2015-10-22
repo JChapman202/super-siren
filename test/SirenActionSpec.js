@@ -22,6 +22,10 @@ describe('SirenAction', () => {
 			expect(sirenAction.title).to.be.null;
 		});
 
+		it('Should have no classes', () => {
+			expect(sirenAction.classes.toJS()).to.be.empty;
+		});
+
 		it('Should have no href', () => {
 			expect(sirenAction.href).to.be.null;
 		});
@@ -112,6 +116,18 @@ describe('SirenAction', () => {
 
 			it('Should have the requested content-type set on the parsed SirenAction', () => {
 				expect(action.type).to.equal(json.type);
+			});
+		});
+
+		describe('When a JSON structure includes a class array', () => {
+			beforeEach(() => {
+				json.class = [chance.string(), chance.string()];
+				act();
+			});
+
+			it('Should contain each class in set of classes on the parsed instance', () => {
+				expect(action.classes.toJS()).to.contain(json.class[0]);
+				expect(action.classes.toJS()).to.contain(json.class[1]);
 			});
 		});
 
