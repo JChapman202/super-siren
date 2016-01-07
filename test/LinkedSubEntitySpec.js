@@ -2,11 +2,11 @@ import LinkedSubEntity from '../lib/LinkedSubEntity';
 import {expect} from 'chai';
 import Chance from 'Chance';
 
-var chance = new Chance();
+let chance = new Chance();
 
 describe('LinkedSubEntity', () => {
 	describe('When getting the empty LinkedSubEntity', () => {
-		var empty;
+		let empty;
 
 		beforeEach(() => {
 			empty = LinkedSubEntity.empty;
@@ -26,10 +26,10 @@ describe('LinkedSubEntity', () => {
 	});
 
 	describe('When parsing a Linked Sub Entity JSON structure', () => {
-		var json;
-		var linkedSubEntity;
+		let json;
+		let linkedSubEntity;
 
-		var act = () => {
+		let act = () => {
 			linkedSubEntity = LinkedSubEntity.fromJson(json);
 		};
 

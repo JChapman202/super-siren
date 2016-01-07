@@ -1,12 +1,14 @@
-var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-var mocha = require('gulp-mocha');
-var babel = require('gulp-babel');
-var concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
-var clean = require('gulp-clean');
-var esdoc = require('gulp-esdoc');
-var ghPages = require('gulp-gh-pages');
+'use strict';
+
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+const mocha = require('gulp-mocha');
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
+const clean = require('gulp-clean');
+const esdoc = require('gulp-esdoc');
+const ghPages = require('gulp-gh-pages');
 
 require('babel/register');
 
