@@ -14,7 +14,7 @@ describe('SirenLink', () => {
 			beforeEach(() => {
 				rels = ['a', 'b'];
 				href = 'http://blah.com';
-				classes = [chance.string(), chance.string()]
+				classes = [chance.string(), chance.string()];
 
 				link = new SirenLink(rels, href, classes);
 			});
