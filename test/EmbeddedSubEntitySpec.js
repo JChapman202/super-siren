@@ -3,13 +3,13 @@ import {expect} from 'chai';
 import Chance from 'chance';
 import sinon from 'sinon';
 
-var EmbeddedSubEntity = Siren.EmbeddedSubEntity;
+let EmbeddedSubEntity = Siren.EmbeddedSubEntity;
 
-var chance = new Chance();
+let chance = new Chance();
 
 describe('EmbeddedSubEntity', () => {
 	describe('When retrieving the empty EmbeddedSubEntity', () => {
-		var empty;
+		let empty;
 
 		beforeEach(() => {
 			empty = EmbeddedSubEntity.empty;
@@ -25,11 +25,11 @@ describe('EmbeddedSubEntity', () => {
 	});
 
 	describe('When parsing a JSON representation of an embedded sub entity', () => {
-		var json;
-		var subEntity;
-		var parse;
+		let json;
+		let subEntity;
+		let parse;
 
-		var act = () => {
+		let act = () => {
 			subEntity = EmbeddedSubEntity.fromJson(json);
 		};
 

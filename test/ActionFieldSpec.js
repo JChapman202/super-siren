@@ -2,11 +2,11 @@ import ActionField from '../lib/ActionField';
 import {expect} from 'chai';
 import Chance from 'Chance';
 
-var chance = new Chance();
+let chance = new Chance();
 
 describe('ActionField', () => {
 	describe('When getting the empty field', () => {
-		var field;
+		let field;
 
 		beforeEach(() => {
 			field = ActionField.empty;
@@ -30,10 +30,10 @@ describe('ActionField', () => {
 	});
 
 	describe('When parsing a JSON structure', () => {
-		var json;
-		var field;
+		let json;
+		let field;
 
-		var act = () => {
+		let act = () => {
 			field = ActionField.fromJson(json);
 		};
 

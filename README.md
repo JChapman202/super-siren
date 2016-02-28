@@ -2,9 +2,9 @@
 
 ## Description ##
 
-[Siren](https://github.com/kevinswiber/siren) Hypermedia client library which process Siren HTTP responses into immutable Siren representations utilizing [superagent](https://github.com/visionmedia/superagent) for the underlying HTTP requests.  All superagent requests are wrapped with [superagent-promise](https://github.com/lightsofapollo/superagent-promise) which exposes [Bluebird](https://github.com/petkaantonov/bluebird) promises for processing http requests.
+[SIREN](https://github.com/kevinswiber/siren) Hypermedia client library which process SIREN HTTP responses into immutable SIREN representations utilizing [superagent](https://github.com/visionmedia/superagent) for the underlying HTTP requests. All superagent requests are wrapped with [superagent-promise](https://github.com/lightsofapollo/superagent-promise) which exposes [Bluebird](https://github.com/petkaantonov/bluebird) promises for processing http requests.
 
-Siren models within this library are created using [Immutable.js](https://github.com/facebook/immutable-js) Records with properties constructed using Immutable maps, sets and lists.
+SIREN models within this library are created using [Immutable.js](https://github.com/facebook/immutable-js) Records with properties constructed using Immutable maps, sets and lists.
 
 ## Links ##
 
@@ -21,13 +21,13 @@ npm install super-siren
 Then require super-siren from any JavaScript module:
 
 ```javascript
-var Siren = require('super-siren');
+let Siren = require('super-siren');
 ```
 
-To get started provide the Siren billboard URL to the static get method.
+To get started provide the SIREN billboard URL to the static get method.
 
 ```javascript
-var Siren = require('super-siren');
+let Siren = require('super-siren');
 
 Siren.get('http://example-siren-url/api')
 	.then(res => {
@@ -36,14 +36,14 @@ Siren.get('http://example-siren-url/api')
 	});
 ```
 
-super-siren automatically registers a Siren parser for all http requests made through super-siren.  Any HTTP response which specifies a content type of `application/vnd.siren+json`.  All other content-types will fall back to the default superagent parsers.
+super-siren automatically registers a SIREN parser for all http requests made through super-siren. Any HTTP response which specifies a content type of `application/vnd.siren+json`. All other content-types will fall back to the default superagent parsers.
 
 ### Setting Global Headers ###
 
-super-siren allows you to set global headers for all requests made through super-siren.  Super-siren will automatically add an Accepts header requesting `application/vnd.siren+json`, so you don't have to worry about adding that one.  To add a custom header simply do the following:
+super-siren allows you to set global headers for all requests made through super-siren. Super-siren will automatically add an Accepts header requesting `application/vnd.siren+json`, so you don't have to worry about adding that one. To add a custom header simply do the following:
 
 ```javascript
-var Siren = require('super-siren');
+let Siren = require('super-siren');
 
 Siren.Client.addHeader('Authentication', 'Bearer ' + bearerToken);
 ```
@@ -56,32 +56,30 @@ Siren.Client.removeHeader('Authentication');
 
 ### Helpers ###
 
-super-siren provides helper functions to assist with navigating through Siren responses.  This allows for using a fluent syntax to navigate from a base Siren URL through it's available links, entities and actions.
+super-siren provides helper functions to assist with navigating through SIREN responses. This allows for using a fluent syntax to navigate from a base SIREN URL through it's available links, entities and actions.
 
-For example if you had a base Siren entity at `http://example-siren/api` and wanted to follow through a link at rel `favorites` and wanted to perform an action named `add-favorite` in order to add a favorite you could write the following:
+For example if you had a base SIREN entity at `http://example-siren/api` and wanted to follow through a link at rel `favorites` and wanted to perform an action named `add-favorite` in order to add a favorite you could write the following:
 
 ```javascript
-var Siren = require('super-siren');
-var follow = Siren.Helper.follow;
-var performAction = Siren.Helper.performAction;
+let Siren = require('super-siren');
+let follow = Siren.Helper.follow;
+let performAction = Siren.Helper.performAction;
 
 Siren.get('http://example-siren/api')
 	.then(follow('favorites'))
-	.then(performAction('add-favorite', {
-		name: 'Siren'
-	}))
+	.then(performAction('add-favorite', { name: 'Siren' })) // the data opts are optional
 	.then(res => {
-		/* Process Siren action HTTP result here */
+		/* Process Siren action HTTP response here */
 	});
 ```
 
-### Siren structure ###
+### SIREN structure ###
 
 ```javascript
-var Siren = require('super-siren');
+let Siren = require('super-siren');
 Siren.get('http://example-siren/api')
 	.then(res => {
-		var siren = res.body;
+		let siren = res.body;
 
 		/* prints all classes as separate log entires*/
 
@@ -136,16 +134,16 @@ Siren.get('http://example-siren/api')
 	});
 ```
 
-### Siren navigation helpers ###
+### SIREN navigation helpers ###
 
 ```javascript
-var Siren = require('super-siren');
+let Siren = require('super-siren');
 
 Siren.get('http://example-siren/api')
 	.then(res => {
-		var siren = res.body;
+		let siren = res.body;
 
-		/* find the first action with the requested name.  null when not found */
+		/* find the first action with the requested name. null when not found */
 
 		siren.findActionByName('add-favorite')
 			.perform({
@@ -155,9 +153,9 @@ Siren.get('http://example-siren/api')
 
 			});
 
-		/* find the first link by the requested rel.  null when not found */
+		/* find the first link by the requested rel. null when not found */
 
-		var href = siren.findLinkByRel('favorites').href;
+		let href = siren.findLinkByRel('favorites').href;
 
 		/* return all entities with the provided rel */
 
