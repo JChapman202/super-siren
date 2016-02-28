@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/JChapman202/super-siren.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div data-ice="classWrap">
+  <h2>Class</h2>
+  <ul>
+    
+  <li data-ice="classDoc"><span><a href="class/lib/ActionField.js~ActionField.html">ActionField</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Client.js~Client.html">Client</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/LinkedSubEntity.js~LinkedSubEntity.html">LinkedSubEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Siren.js~Siren.html">Siren</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/SirenAction.js~SirenAction.html">SirenAction</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/SirenLink.js~SirenLink.html">SirenLink</a></span></li>
+</ul>
+</div>
+
+
+
+
+
+<div data-ice="variableWrap">
+  <h2><a href="variable/">Variable</a></h2>
+  <ul>
+    
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-actionField">actionField</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-client">client</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-linkedSubEntity">linkedSubEntity</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-siren">siren</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-sirenAction">sirenAction</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-sirenLink">sirenLink</a></span></li>
+</ul>
+</div>
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="super-siren">Super-Siren</h1>
+<h2 id="description">Description</h2>
+<p><a href="https://github.com/kevinswiber/siren">SIREN</a> Hypermedia client library which process SIREN HTTP responses into immutable SIREN representations utilizing <a href="https://github.com/visionmedia/superagent">superagent</a> for the underlying HTTP requests. All superagent requests are wrapped with <a href="https://github.com/lightsofapollo/superagent-promise">superagent-promise</a> which exposes <a href="https://github.com/petkaantonov/bluebird">Bluebird</a> promises for processing http requests.</p>
+<p>SIREN models within this library are created using <a href="https://github.com/facebook/immutable-js">Immutable.js</a> Records with properties constructed using Immutable maps, sets and lists.</p>
+<h2 id="links">Links</h2>
+<p><a href="http://jchapman202.github.io/super-siren/">API docs</a></p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Install <code>super-siren</code> using npm.</p>
+<pre><code class="lang-shell"><code class="source-code prettyprint">npm install super-siren</code>
+</code></pre>
+<p>Then require super-siren from any JavaScript module:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">let Siren = require(&apos;super-siren&apos;);</code>
+</code></pre>
+<p>To get started provide the SIREN billboard URL to the static get method.</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">let Siren = require(&apos;super-siren&apos;);
+
+Siren.get(&apos;http://example-siren-url/api&apos;)
+    .then(res =&gt; {
+        /* process http result here */
+        /* Siren instance lives on res.body */
+    });</code>
+</code></pre>
+<p>super-siren automatically registers a SIREN parser for all http requests made through super-siren. Any HTTP response which specifies a content type of <code>application/vnd.siren+json</code>. All other content-types will fall back to the default superagent parsers.</p>
+<h3 id="setting-global-headers">Setting Global Headers</h3>
+<p>super-siren allows you to set global headers for all requests made through super-siren. Super-siren will automatically add an Accepts header requesting <code>application/vnd.siren+json</code>, so you don&apos;t have to worry about adding that one. To add a custom header simply do the following:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">let Siren = require(&apos;super-siren&apos;);
+
+Siren.Client.addHeader(&apos;Authentication&apos;, &apos;Bearer &apos; + bearerToken);</code>
+</code></pre>
+<p>To then later remove the header you can simply:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">Siren.Client.removeHeader(&apos;Authentication&apos;);</code>
+</code></pre>
+<h3 id="helpers">Helpers</h3>
+<p>super-siren provides helper functions to assist with navigating through SIREN responses. This allows for using a fluent syntax to navigate from a base SIREN URL through it&apos;s available links, entities and actions.</p>
+<p>For example if you had a base SIREN entity at <code>http://example-siren/api</code> and wanted to follow through a link at rel <code>favorites</code> and wanted to perform an action named <code>add-favorite</code> in order to add a favorite you could write the following:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">let Siren = require(&apos;super-siren&apos;);
+let follow = Siren.Helper.follow;
+let performAction = Siren.Helper.performAction;
+
+Siren.get(&apos;http://example-siren/api&apos;)
+    .then(follow(&apos;favorites&apos;))
+    .then(performAction(&apos;add-favorite&apos;, { name: &apos;Siren&apos; })) // the data opts are optional
+    .then(res =&gt; {
+        /* Process Siren action HTTP response here */
+    });</code>
+</code></pre>
+<h3 id="siren-structure">SIREN structure</h3>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">let Siren = require(&apos;super-siren&apos;);
+Siren.get(&apos;http://example-siren/api&apos;)
+    .then(res =&gt; {
+        let siren = res.body;
+
+        /* prints all classes as separate log entires*/
+
+        siren.classes
+            .forEach(class =&gt; console.log(class));
+
+        /* prints all hrefs that have the rel &apos;example&apos; */
+
+        siren.links
+            .filter(link =&gt; link.rels.contains(&apos;example&apos;))
+            .map(link =&gt; link.href)
+            .forEach(href =&gt; console.log(href));
+
+
+        /* prints the first rel of all sub-entities which have the
+        &apos;example&apos; rel*/
+
+        siren.entities
+            .filter(entity =&gt; entity.rels.contains(&apos;example&apos;))
+            .forEach(entity =&gt; console.log(entity.rels.first()));
+
+
+        /* prints the JS array of all classes for all embedded sub entities
+        which have a rel of &apos;example&apos; */
+
+        siren.embeddedEntities
+            .filter(entity =&gt; entity.rels.contains(&apos;example&apos;))
+            .map(entity =&gt; entity.entity)
+            .forEach(entity =&gt; console.log(entity.classes.toJS()));
+
+        /* prints all href locations for all linked sub-entities that have
+        the rel of &apos;example&apos; */
+
+        siren.linkedEntities
+            .filter(entity =&gt; entity.rels.contains(&apos;example&apos;))
+            .map(entity =&gt; entity.href)
+            .forEach(href =&gt; console.log(href));
+
+        /* performs the siren action named &apos;add-favorite&apos; */
+
+        siren.actions
+            .first(action =&gt; action.name === &apos;add-favorite&apos;)
+            .perform({
+                name: &apos;Siren&apos;
+            })
+            .then(res =&gt; {
+                console.log(&apos;Submitted siren as my favorite!&apos;);
+            })
+            .catch(err =&gt; {
+                console.log(&apos;Submitting siren as my favorite would never fail!&apos;);
+            })
+    });</code>
+</code></pre>
+<h3 id="siren-navigation-helpers">SIREN navigation helpers</h3>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">let Siren = require(&apos;super-siren&apos;);
+
+Siren.get(&apos;http://example-siren/api&apos;)
+    .then(res =&gt; {
+        let siren = res.body;
+
+        /* find the first action with the requested name. null when not found */
+
+        siren.findActionByName(&apos;add-favorite&apos;)
+            .perform({
+                name: &apos;Siren&apos;
+            })
+            .then(res =&gt; {
+
+            });
+
+        /* find the first link by the requested rel. null when not found */
+
+        let href = siren.findLinkByRel(&apos;favorites&apos;).href;
+
+        /* return all entities with the provided rel */
+
+        siren.findEntitiesByRel(&apos;cool-stuff&apos;);
+
+        /* same thing but only for embedded entities */
+
+        siren.embeddedEntitiesByRel(&apos;cool-stuff&apos;);
+
+        /* and only for linked sub-entities */
+
+        siren.linkedEntitiesByRel(&apos;cool-stuff&apos;);
+    });</code>
+</code></pre>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.6)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "coverage": "73.8%",
+  "expectCount": 42,
+  "actualCount": 31,
+  "files": {
+    "lib/ActionField.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        49
+      ]
+    },
+    "lib/Client.js": {
+      "expectCount": 11,
+      "actualCount": 6,
+      "undocumentLines": [
+        49,
+        148,
+        42,
+        35,
+        28
+      ]
+    },
+    "lib/LinkedSubEntity.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        50
+      ]
+    },
+    "lib/Siren.js": {
+      "expectCount": 14,
+      "actualCount": 12,
+      "undocumentLines": [
+        27,
+        232
+      ]
+    },
+    "lib/SirenAction.js": {
+      "expectCount": 5,
+      "actualCount": 4,
+      "undocumentLines": [
+        110
+      ]
+    },
+    "lib/SirenLink.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        41
+      ]
+    }
+  }
+}

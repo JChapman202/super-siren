@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;;;wBAAkB,aAAa","file":"index.js","sourcesContent":["import Siren from './lib/Siren';\n\nexport default Siren;\n"],"sourceRoot":"/source/"}

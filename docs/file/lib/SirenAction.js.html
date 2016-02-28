@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">lib/SirenAction.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/JChapman202/super-siren.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div data-ice="classWrap">
+  <h2>Class</h2>
+  <ul>
+    
+  <li data-ice="classDoc"><span><a href="class/lib/ActionField.js~ActionField.html">ActionField</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Client.js~Client.html">Client</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/LinkedSubEntity.js~LinkedSubEntity.html">LinkedSubEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Siren.js~Siren.html">Siren</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/SirenAction.js~SirenAction.html">SirenAction</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/SirenLink.js~SirenLink.html">SirenLink</a></span></li>
+</ul>
+</div>
+
+
+
+
+
+<div data-ice="variableWrap">
+  <h2><a href="variable/">Variable</a></h2>
+  <ul>
+    
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-actionField">actionField</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-client">client</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-linkedSubEntity">linkedSubEntity</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-siren">siren</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-sirenAction">sirenAction</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-sirenLink">sirenLink</a></span></li>
+</ul>
+</div>
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/SirenAction.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import _ from &apos;lodash&apos;;
+import Immutable from &apos;immutable&apos;;
+import ActionField from &apos;./ActionField&apos;;
+import Client from &apos;./Client&apos;;
+import SirenHelpers from &apos;./SirenHelpers&apos;;
+
+/**
+ * Representation of a Siren action, which allows a state within a Siren Hypermedia API
+ * to transition to a new state.
+ *
+ * @param {String} options.name:   null                                [description]
+ * @param {String} options.title:  null                                [description]
+ * @param {String} options.method: &apos;GET&apos;                               [description]
+ * @param {String} options.href:   null                                [description]
+ * @param {String} options.type:   &apos;application/x-www-form-urlencoded&apos; [description]
+ * @param {Immutable.Map} options.fields: new Immutable.Map()          [description]
+ */
+class SirenAction extends Immutable.Record({
+	name: null,
+	title: null,
+	method: &apos;GET&apos;,
+	href: null,
+	classes: new Immutable.Set(),
+	type: &apos;application/x-www-form-urlencoded&apos;,
+	fields: new Immutable.Map()
+}) {
+	/**
+	 * Performs the action specified by this Action.
+	 *
+	 * @param  {Object=} data                          Query params sent as part of this action
+	 * @return {superagent-promise} Superagent Promise HTTP request to perform this action
+	 */
+	perform(data) {
+		data = data || {};
+
+		const req = Client.action(this.method, this.href);
+
+		if (this.type &amp;&amp; this.type !== &apos;multipart/form-data&apos;) {
+			//superagent needs to set it&apos;s own type for multipart/form-data content
+			req.type(this.type);
+		}
+
+		const payload = {};
+
+		this.fields.forEach(f =&gt; { if(f.value) payload[f.name] = f.value });
+		Immutable.fromJS(data).forEach((value, key) =&gt; payload[key] = value);
+
+		if (this.method.toLowerCase() === &apos;get&apos;) {
+			req.query(payload);
+		}
+		else {
+			if (this.type === &apos;multipart/form-data&apos;) {
+				const formData = new FormData();
+
+				for (let key in payload) {
+					formData.append(key, payload[key]);
+				}
+
+				req.send(formData);
+			}
+			else {
+				req.send(payload);
+			}
+		}
+
+		return req;
+	}
+
+	/**
+	 * Creates a SirenAction instance based on the provided
+	 * JSON object structure.
+	 *
+	 * @param  {Object} json      Object which matches the Siren JSON structure.
+	 * @param  {String} [baseUrl] optional url to use as the base URL for all parsed URLs
+	 * @return {SirenAction}      Result of parsing the provided JSON object.
+	 */
+	static fromJson(json, baseUrl) {
+		if (!json.name) {
+			throw new Error(&apos;&quot;name&quot; is requires on an action&apos;);
+		}
+
+		return empty.withMutations(map =&gt; {
+			map.set(&apos;name&apos;, json.name || map.name);
+			map.set(&apos;title&apos;, json.title || map.title);
+			map.set(&apos;method&apos;, json.method || map.method);
+			map.set(&apos;href&apos;, SirenHelpers.processUrl(json.href || map.href, baseUrl));
+			map.set(&apos;classes&apos;, new Immutable.Set(json.class || []));
+			map.set(&apos;type&apos;, json.type || map.type);
+			map.set(&apos;fields&apos;, new Immutable.Map(_
+				.map(json.fields || [], f =&gt; ActionField.fromJson(f))
+				.map(af =&gt; [af.name, af]))
+			);
+		});
+	}
+
+	/**
+	 * Default state for a SirenAction.  This has the defaults set and nothing
+	 * else.
+	 *
+	 * @return {SirenAction} Siren Action which is created as a result of parsing
+	 *                             the provided JSON.
+	 */
+	static get empty() {
+		return empty;
+	}
+}
+
+const empty = new SirenAction();
+
+export default SirenAction;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.6)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
