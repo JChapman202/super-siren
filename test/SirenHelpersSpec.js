@@ -11,70 +11,70 @@ const sirenData = Siren.fromJson(JSON.parse(rootData));
 const respBody = { body: sirenData };
 
 const
-  domain = 'http://example.com',
-  path = '/pets';
+	domain = 'http://example.com',
+	path = '/pets';
 
 let scope;
 
 describe('SirenHelpers', () => {
-  beforeEach(() => {
-    scope = nock('http://example.com')
-      .filteringPath(/\?.*/g, '') // remove the query params
-      .get('/pets')
-      .reply(200, { pet: 'mock animal name' }, {});
-  });
+	beforeEach(() => {
+		scope = nock('http://example.com')
+			.filteringPath(/\?.*/g, '') // remove the query params
+			.get('/pets')
+			.reply(200, { pet: 'mock animal name' }, {});
+	});
 
-  describe('When performAction', () => {
-    it('Should find the "find-dogs" Action name and perform it (no overwrite data)', (done) => {
-      const actionName = 'find-dogs';
-      const data = undefined;
+	describe('When performAction', () => {
+		it('Should find the "find-dogs" Action name and perform it (no overwrite data)', (done) => {
+			const actionName = 'find-dogs';
+			const data = undefined;
 
-      const promise = SirenHelpers.performAction(actionName, data)(respBody)
-        .then(data => {
-          expect(data.req.path).to.equal('/pets?page=0&filter=dog');
-          expect(data.res.body.pet).to.equal('mock animal name');
-          expect(scope.isDone()).to.be.true;
-          done();
-        });
-    });
+			const promise = SirenHelpers.performAction(actionName, data)(respBody)
+				.then(data => {
+					expect(data.req.path).to.equal('/pets?page=0&filter=dog');
+					expect(data.res.body.pet).to.equal('mock animal name');
+					expect(scope.isDone()).to.be.true;
+					done();
+				});
+		});
 
-    it('should find the "find-cats" Action name and perform it (with overwrite data)', (done) => {
-      const actionName = 'find-cats';
-      const data = { filter: "fish" };
+		it('should find the "find-cats" Action name and perform it (with overwrite data)', (done) => {
+			const actionName = 'find-cats';
+			const data = { filter: "fish" };
 
-      const promise = SirenHelpers.performAction(actionName, data)(respBody)
-        .then(data => {
-          expect(data.req.path).to.equal('/pets?page=0&filter=fish');
-          expect(data.res.body.pet).to.equal('mock animal name');
-          expect(scope.isDone()).to.be.true;
-          done();
-        });
-    });
-  });
+			const promise = SirenHelpers.performAction(actionName, data)(respBody)
+				.then(data => {
+					expect(data.req.path).to.equal('/pets?page=0&filter=fish');
+					expect(data.res.body.pet).to.equal('mock animal name');
+					expect(scope.isDone()).to.be.true;
+					done();
+				});
+		});
+	});
 
-  describe('When follow', () => {
-    it('Should find the "self" Link rel and follow it', (done) => {
-      const actionName = 'self';
+	describe('When follow', () => {
+		it('Should find the "self" Link rel and follow it', (done) => {
+			const actionName = 'self';
 
-      const promise = SirenHelpers.follow(actionName)(respBody)
-        .then(data => {
-          expect(data.req.path).to.equal('/pets?page=1&filter=dog');
-          expect(data.res.body.pet).to.equal('mock animal name');
-          expect(scope.isDone()).to.be.true;
-          done();
-        });
-    });
+			const promise = SirenHelpers.follow(actionName)(respBody)
+				.then(data => {
+					expect(data.req.path).to.equal('/pets?page=1&filter=dog');
+					expect(data.res.body.pet).to.equal('mock animal name');
+					expect(scope.isDone()).to.be.true;
+					done();
+				});
+		});
 
-    it('should find the "next" Link rel and follow it', (done) => {
-      const actionName = 'next';
+		it('should find the "next" Link rel and follow it', (done) => {
+			const actionName = 'next';
 
-      const promise = SirenHelpers.follow(actionName)(respBody)
-        .then(data => {
-          expect(data.req.path).to.equal('/pets?page=2&filter=dog');
-          expect(data.res.body.pet).to.equal('mock animal name');
-          expect(scope.isDone()).to.be.true;
-          done();
-        });
-    });
-  });
+			const promise = SirenHelpers.follow(actionName)(respBody)
+				.then(data => {
+					expect(data.req.path).to.equal('/pets?page=2&filter=dog');
+					expect(data.res.body.pet).to.equal('mock animal name');
+					expect(scope.isDone()).to.be.true;
+					done();
+				});
+		});
+	});
 });
