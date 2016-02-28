@@ -1,21 +1,21 @@
 import Client from '../lib/Client';
 import {expect} from 'chai';
 import Chance from 'Chance';
-var chance = new Chance();
+const chance = new Chance();
 
 describe('Client', () => {
 	describe('When adding a global header', () => {
-		var header;
-		var value;
+		let header;
+		let value;
 
-		beforeEach(() => {
-			header = chance.header;
-			value = chance.value;
+		before(() => {
+			header = chance.string();
+			value = chance.string();
 
-			Client.addHeader(chance.string(), chance.string());
+			Client.addHeader(header, value);
 		});
 
-		afterEach(() => {
+		after(() => {
 			Client.removeHeader(header);
 		});
 
@@ -24,7 +24,7 @@ describe('Client', () => {
 		});
 
 		describe('When removing a global header', () => {
-			beforeEach(() => {
+			before(() => {
 				Client.removeHeader(header);
 			});
 

@@ -4,11 +4,11 @@ import {expect} from 'chai';
 import Chance from 'Chance';
 import sinon from 'sinon';
 
-var chance = new Chance();
+let chance = new Chance();
 
 describe('SirenAction', () => {
 	describe('Empty action', () => {
-		var sirenAction;
+		let sirenAction;
 
 		beforeEach(() => {
 			sirenAction = SirenAction.empty;
@@ -40,10 +40,10 @@ describe('SirenAction', () => {
 	});
 
 	describe('When parsing a JSON structure', () => {
-		var action;
-		var json;
+		let action;
+		let json;
 
-		var act = () => {
+		let act = () => {
 			action = SirenAction.fromJson(json);
 		};
 
@@ -132,7 +132,7 @@ describe('SirenAction', () => {
 		});
 
 		describe('When the JSON structure includes fields', () => {
-			var parse;
+			let parse;
 
 			beforeEach(() => {
 				parse = ActionField.fromJson;

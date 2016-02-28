@@ -7,12 +7,12 @@ import {expect} from 'chai';
 import Chance from 'Chance';
 import sinon from 'sinon';
 
-var EmbeddedSubEntity = Siren.EmbeddedSubEntity;
-var chance = new Chance();
+let EmbeddedSubEntity = Siren.EmbeddedSubEntity;
+let chance = new Chance();
 
 describe('Siren', () => {
 	describe('When creating a new Siren entity', () => {
-		var siren;
+		let siren;
 
 		beforeEach(() => {
 			siren = new Siren();
@@ -35,7 +35,7 @@ describe('Siren', () => {
 		});
 
 		describe('empty', () => {
-			var empty;
+			let empty;
 
 			beforeEach(() => {
 				empty = Siren.empty;
@@ -48,7 +48,7 @@ describe('Siren', () => {
 
 		describe('selfLink', () => {
 			describe('When a link with a self rel exists', () => {
-				var link;
+				let link;
 
 				beforeEach(() => {
 					link = new SirenLink(['self'], chance.url());
@@ -61,7 +61,7 @@ describe('Siren', () => {
 			});
 
 			describe('When no link with a self rel exists', () => {
-				var link;
+				let link;
 
 				beforeEach(() => {
 					link = new SirenLink('not-self', chance.url());
@@ -75,9 +75,9 @@ describe('Siren', () => {
 		});
 
 		describe('When parsing a JSON Siren representation', () => {
-			var json;
+			let json;
 
-			var act = () => {
+			let act = () => {
 				siren = Siren.fromJson(json);
 			};
 
@@ -192,7 +192,7 @@ describe('Siren', () => {
 			});
 
 			describe('When the JSON contains actions', () => {
-				var parse;
+				let parse;
 
 				beforeEach(() => {
 					parse = SirenAction.fromJson;
@@ -225,7 +225,7 @@ describe('Siren', () => {
 			});
 
 			describe('When the JSON contains a linked sub-entity', () => {
-				var parse;
+				let parse;
 
 				beforeEach(() => {
 					parse = LinkedSubEntity.fromJson;
@@ -262,7 +262,7 @@ describe('Siren', () => {
 			});
 
 			describe('When the JSON contains an embedded sub-entity', () => {
-				var parse;
+				let parse;
 
 				beforeEach(() => {
 					parse = EmbeddedSubEntity.fromJson;
