@@ -10,6 +10,8 @@ SIREN models within this library are created using [Immutable.js](https://github
 
 [API docs](http://jchapman202.github.io/super-siren/)
 
+[Siren-Crawler](https://github.com/JChapman202/siren-crawler) - Siren Crawler is a generic Siren browser that utilizes super-siren for requesting and parsing all SIREN messages.  Siren Crawler is implemented as a single page javascript application utilizing [React](https://facebook.github.io/react/) and flux.
+
 ## Getting Started ##
 
 Install `super-siren` using npm.
