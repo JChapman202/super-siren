@@ -54,9 +54,9 @@ describe('SirenHelpers', () => {
 
 	describe('When follow', () => {
 		it('Should find the "self" Link rel and follow it', (done) => {
-			const actionName = 'self';
+			const relName = 'self';
 
-			const promise = SirenHelpers.follow(actionName)(respBody)
+			const promise = SirenHelpers.follow(relName)(respBody)
 				.then(data => {
 					expect(data.req.path).to.equal('/pets?page=1&filter=dog');
 					expect(data.res.body.pet).to.equal('mock animal name');
@@ -66,9 +66,9 @@ describe('SirenHelpers', () => {
 		});
 
 		it('should find the "next" Link rel and follow it', (done) => {
-			const actionName = 'next';
+			const relName = 'next';
 
-			const promise = SirenHelpers.follow(actionName)(respBody)
+			const promise = SirenHelpers.follow(relName)(respBody)
 				.then(data => {
 					expect(data.req.path).to.equal('/pets?page=2&filter=dog');
 					expect(data.res.body.pet).to.equal('mock animal name');
