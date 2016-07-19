@@ -10,7 +10,7 @@ const clean = require('gulp-clean');
 const esdoc = require('gulp-esdoc');
 const ghPages = require('gulp-gh-pages');
 
-require('babel/register');
+require('babel-register');
 
 gulp.task('clean', function() {
 	return gulp.src(['dist'], {read: false})
@@ -20,7 +20,10 @@ gulp.task('clean', function() {
 gulp.task('build', ['clean'], function() {
 	return gulp.src(['index.js', 'lib/**/*.js'], {base: './'})
 		.pipe(sourcemaps.init())
-		.pipe(babel({optional: ['runtime']}))
+		.pipe(babel({
+			presets: ['es2015'],
+			plugins: ['transform-runtime']
+		}))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('dist'));
 });
@@ -34,11 +37,15 @@ gulp.task('lint', function() {
 
 gulp.task('test', function() {
 	return gulp.src(['test/**/*.js'], {read: false})
+		.pipe(babel({
+			presets: ['es2015'],
+			plugins: ['transform-runtime']
+		}))
 		.pipe(mocha({
-			compilers: {
-				js: babel
-			},
-			reporter: 'spec'
+			reporter: 'spec',
+			require: [
+				'babel-polyfill'
+			]
 		}));
 });
 
