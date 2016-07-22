@@ -41,8 +41,8 @@ describe('Siren', () => {
 				empty = Siren.empty;
 			});
 
-			it('A new siren entity should be the same instance as the static empty Siren', () => {
-				expect(siren).to.equal(empty);
+			it('A new siren entity should be equivalent to the static empty Siren', () => {
+				expect(Immutable.is(siren, empty)).to.be.true;
 			});
 		});
 
