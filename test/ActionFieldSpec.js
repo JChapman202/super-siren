@@ -96,5 +96,27 @@ describe('ActionField', () => {
 				expect(field.value).to.equal(json.value);
 			});
 		});
+		
+		describe('When the JSON structure includes a value of 0', () => {
+			beforeEach(() => {
+				json.value = 0;
+				act();
+			});
+
+			it('Should have the value set on the parsed ActionField', () => {
+				expect(field.value).to.equal(json.value);
+			});
+		});
+		
+		describe('When the JSON structure includes a value of false', () => {
+			beforeEach(() => {
+				json.value = false;
+				act();
+			});
+
+			it('Should have the value set on the parsed ActionField', () => {
+				expect(field.value).to.equal(json.value);
+			});
+		});
 	});
 });
